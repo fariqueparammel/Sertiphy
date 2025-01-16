@@ -33,16 +33,20 @@ class AppServiceProvider extends ServiceProvider
         //     Css::make('custom-sidebar-topbar', __DIR__ . '/../../resources/css/custom-sidebar-topbar.css')->loadedOnRequest(),
         // ]);
 
+
+
         FilamentView::registerRenderHook(
             PanelsRenderHook::HEAD_END,
             function () {
                 if (request()->routeIs('filament.app.pages.certificate-designer')) {
-                    return  Blade::render('<link rel="stylesheet" href="' . asset('css/custom-sidebar-topbar.css') . '">');
-                    // Blade::render('@vite(\'resources/css/custom-sidebar-topbar.css\')'); //apply this in case of using tailwind utilities
+                    // Combine the <link> and <script> tags into a single string
+                    return Blade::render('
+                        <link rel="stylesheet" href="' . asset('css/custom-sidebar-topbar.css') . '">
+                        <script src="' . asset('js/filament/konvaScript.js') . '"></script>
+                    ');
                 }
             }
         );
-
         // FilamentView::registerRenderHook(
 
         //     PanelsRenderHook::CONTENT_START,
