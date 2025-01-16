@@ -18,13 +18,18 @@
         </div>
         {{-- </div> --}}
     </div>
-
-    <div id="konvaCanvas">
+    <div class="stateManagement-container-canvas">
+        <div class="topPanel">
+        </div>
+        <div id="konvaCanvas"></div>
 
 
     </div>
     <div class="Rside-gallery">
 
+        <div class="ai-otherfeatures"></div>
+
+        <div class="sample-draggable-data"></div>
 
     </div>
 
