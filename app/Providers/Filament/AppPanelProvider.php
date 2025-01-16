@@ -23,6 +23,9 @@ class AppPanelProvider extends PanelProvider
     public function panel(Panel $panel): Panel
     {
         return $panel
+            ->sidebarFullyCollapsibleOnDesktop()
+            ->sidebarWidth('12rem')
+            // ->topbar('fasle')
             ->id('app')
             ->path('/')
             ->registration()

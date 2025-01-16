@@ -21,6 +21,7 @@
         {{-- <input type="hidden" name="record" value="{{ $record }}"> --}}
         <div class="flex gap-x-6">
             <!-- File Upload Button -->
+
             <x-filament::button color="primary">
                 <x-filament::input type="file" id="uploadfile" name="file" class="hidden"
                     accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />

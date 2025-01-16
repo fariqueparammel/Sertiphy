@@ -41,7 +41,7 @@ class uploadFile extends Controller
                 ->body('Your file has been uploaded successfully!')
                 ->send();
 
-            return redirect()->back();
+            return redirect('/certificate-designer');
             // return back()->with('success', 'File uploaded successfully!');
         }
         Notification::make()

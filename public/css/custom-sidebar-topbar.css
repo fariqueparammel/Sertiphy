@@ -1,0 +1,94 @@
+/* .fi-sidebar{
+    position: fixed;
+  z-index: 1000;
+
+  opacity: 1;
+}
+.fi-sidebar-nav{
+    background-color: rgb(7, 5, 5);
+} */
+
+.fi-main {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.main-layout {
+    height: calc(100vh - 4rem);
+    overflow: auto;
+    background-color: antiquewhite;
+}
+
+main {
+    /* max-height: none !important; */
+    max-width: none !important;
+    /* Overrides the max-w-7xl restriction */
+    width: 100%;
+    padding-left: 0 !important;
+    /* overrides both padding*/
+    padding-right: 0 !important;
+}
+
+.Lside-gallery {
+    /* position: relative; */
+    /* transition: margin-left 5s; */
+    display: flex;
+    flex-direction: column;
+    /* Stack children vertically */
+    height: calc(100vh - 4rem);
+    /* Full height of the viewport */
+    /* overflow: hidden; */
+
+    left: 0px;
+    overflow: auto;
+    width: 15%;
+    height: calc(100vh - 4rem);
+    /* border: 3px solid #73AD21; */
+
+}
+
+#preset-template {
+    overflow: auto;
+    height: 50%;
+    width: 100%;
+    resize: vertical;
+
+    /* background-color: yellow ; */
+}
+
+#upload-template {
+    flex-grow: 1;
+    /* Use remaining space */
+    background-color: goldenrod;
+    overflow: auto;
+    /* resize: vertical;
+    height: 50%;
+    width: 100%;
+   float: bottom;
+
+    background-color: goldenrod ; */
+}
+
+/* #container {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 4rem);
+    overflow: hidden;
+} */
+
+.image-container {
+    margin: 7px;
+
+    border-radius: 12%;
+    background-color: rgb(56, 54, 54);
+}
+
+.template-image {
+    border-radius: 12%;
+
+}
+
+
+
+
+#konvaCanvas {}

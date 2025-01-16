@@ -1,3 +1,10 @@
-<x-filament-panels::page>
+@extends('filament.app.layouts.certificate-layout')
 
-</x-filament-panels::page>
+
+
+
+
+@section('images')
+    @include('filament.app.components.preset-template', ['files' => $files])
+    {{-- , ['files' => $files]) --}}
+@endsection
