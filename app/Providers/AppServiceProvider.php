@@ -35,18 +35,31 @@ class AppServiceProvider extends ServiceProvider
 
 
 
+        // FilamentView::registerRenderHook(
+        //     PanelsRenderHook::HEAD_END,
+        //     function () {
+        //         if (request()->routeIs('filament.app.pages.certificate-designer')) {
+        //             // Combine the <link> and <script> tags into a single string
+        //             return Blade::render('
+        //                 <link rel="stylesheet" href="' . asset('css/custom-sidebar-topbar.css') . '">
+        //                 <script src="' . asset('js/filament/konvaScript.js') . '"></script>
+        //             ');
+        //         }
+        //     }
+        // );
+
         FilamentView::registerRenderHook(
             PanelsRenderHook::HEAD_END,
             function () {
                 if (request()->routeIs('filament.app.pages.certificate-designer')) {
-                    // Combine the <link> and <script> tags into a single string
+                    // Use Vite's helper to generate the asset tags
                     return Blade::render('
-                        <link rel="stylesheet" href="' . asset('css/custom-sidebar-topbar.css') . '">
-                        <script src="' . asset('js/filament/konvaScript.js') . '"></script>
+                        @vite(["public/css/custom-sidebar-topbar.css", "public/js/filament/konvaScript.js"])
                     ');
                 }
             }
         );
+
         // FilamentView::registerRenderHook(
 
         //     PanelsRenderHook::CONTENT_START,

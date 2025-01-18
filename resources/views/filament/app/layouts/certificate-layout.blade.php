@@ -20,8 +20,12 @@
     </div>
     <div class="stateManagement-container-canvas">
         <div class="topPanel">
+
         </div>
-        <div id="konvaCanvas"></div>
+        <div id="konvaCanvas">
+
+            <div id="container"></div>
+        </div>
 
 
     </div>
