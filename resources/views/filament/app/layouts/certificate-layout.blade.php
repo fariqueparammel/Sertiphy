@@ -6,13 +6,14 @@
         <div id="preset-template" class="Lside-gallery-preset-template">
 
             {{-- @include('filament.app.components.preset-template') --}}
-            @yield('images')
+            @yield('preset-template')
 
         </div>
 
         <div id="upload-template" class="Lside-gallery-template-upload">
-
             fsr
+            {{-- @yield('upload-template') --}}
+
             {{--
                 @include('filament.app.components.upload-template') --}}
         </div>

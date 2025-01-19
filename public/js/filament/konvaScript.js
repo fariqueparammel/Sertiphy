@@ -47,7 +47,17 @@ function fitStageIntoParentContainer() {
     stage.scale({ x: scalew, y: scaleh });
 }
 
-// adapt the stage on any window resize
 window.addEventListener("resize", fitStageIntoParentContainer);
 
 fitStageIntoParentContainer();
+
+function myFunction(fileUrl) {
+    console.log("Button clicked! File URL:", fileUrl);
+}
+
+document.querySelectorAll(".image-button").forEach((button) => {
+    button.addEventListener("click", function () {
+        const fileUrl = this.getAttribute("data-file-url");
+        myFunction(fileUrl);
+    });
+});

@@ -78,15 +78,20 @@ main {
 
 .image-container {
     margin: 7px;
-
+display: flex;
     border-radius: 12%;
     background-color: rgb(56, 54, 54);
 }
 
 .template-image {
     border-radius: 12%;
+
 }
 
+.image-button{
+    padding: 2%;
+    border-radius: 12%;
+}
 
 
 .Rside-gallery {
