@@ -1,9 +1,6 @@
 import Konva from "konva";
-
 let sceneWidth = 900;
 let sceneHeight = 900;
-
-// first we need to create a stage
 
 var stage = new Konva.Stage({
     container: "container", // id of container <div>
@@ -11,26 +8,8 @@ var stage = new Konva.Stage({
     height: sceneHeight,
 });
 
-// then create layer
 var layer = new Konva.Layer();
 stage.add(layer);
-// // create our shape
-// var circle = new Konva.Circle({
-//     x: stage.width() / 2,
-//     y: stage.height() / 2,
-//     radius: 70,
-//     fill: "red",
-//     stroke: "black",
-//     strokeWidth: 4,
-// });
-
-// // add the shape to the layer
-// layer.add(circle);
-
-// add the layer to the stage
-
-// draw the image
-// layer.draw();
 
 function fitStageIntoParentContainer() {
     var container = document.querySelector("#konvaCanvas");
@@ -73,3 +52,24 @@ document.querySelectorAll(".image-button").forEach((button) => {
         getCurrentImageUrl(imageUrl);
     });
 });
+
+// document.addEventListener('alpine:init', () => {
+//     Alpine.data('templateUpload', () => ({
+
+//     }))
+// })
+document
+    .getElementById("templateButton")
+    .addEventListener("click", function () {
+        document.getElementById("templateImage").click();
+    });
+
+document
+    .getElementById("templateImage")
+    .addEventListener("change", function (event) {
+        const file = event.target.files[0];
+        if (file) {
+            console.log("File selected:", file.name);
+            // You can handle the file upload or other actions here
+        }
+    });

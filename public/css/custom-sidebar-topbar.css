@@ -142,3 +142,17 @@ background-color: chartreuse;
 height: 100%;
 width: 100%;
 }
+
+#addTemplateButton{
+
+    margin-top: 8%;
+    width: 100%;
+    display: flex; /* Make the container a flexbox */
+    justify-content: center; /* Center horizontally */
+    align-items: center;
+}
+
+/* #templateButton{
+
+    margin: 50%;
+} */

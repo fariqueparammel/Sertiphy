@@ -9,6 +9,6 @@
     {{-- , ['files' => $files]) --}}
 @endsection
 
-{{-- @section('upload-template')
+@section('upload-template')
     @include('filament.app.components.upload-template')
-@endsection --}}
+@endsection

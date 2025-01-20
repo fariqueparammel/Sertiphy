@@ -11,8 +11,8 @@
         </div>
 
         <div id="upload-template" class="Lside-gallery-template-upload">
-            fsr
-            {{-- @yield('upload-template') --}}
+
+            @yield('upload-template')
 
             {{--
                 @include('filament.app.components.upload-template') --}}
