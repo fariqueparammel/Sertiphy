@@ -73,7 +73,6 @@ document
         }
     });
 function uploadedImageDisplay(file) {
-    i += 1;
     const uploadedImage = document.querySelector(".uploaded-image-button");
 
     // Clone the button element (including its child elements like <img>)

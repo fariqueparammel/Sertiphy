@@ -16,7 +16,7 @@
 .main-layout {
     height: calc(100vh - 4rem);
     overflow: auto;
-    background-color: antiquewhite;
+    /* background-color: antiquewhite; */
     display: flex;
 }
 
@@ -53,21 +53,22 @@ main {
     width: 100%;
     resize: vertical;
 
-    /* background-color: yellow ; */
+    background-color:  rgb(96, 96, 96);
 }
 
 #upload-template {
     flex-grow: 1;
     /* Use remaining space */
-    background-color: goldenrod;
+    /* background-color: goldenrod; */
     overflow: auto;
     /* padding: 3%; */
     /* resize: vertical;
     height: 50%;
     width: 100%;
-   float: bottom;
+   float: bottom;*/
+   background-color: rgb(96, 96, 96);
 
-    background-color: goldenrod ; */
+
 }
 
 /* #container {
@@ -81,13 +82,13 @@ main {
     margin: 7px;
 display: flex;
     border-radius: 12%;
-    background-color: rgb(56, 54, 54);
+    /* background-color: rgb(56, 54, 54); */
 }
 .uploaded-image-container{
     margin: 7px;
     display: flex;
         border-radius: 12%;
-        background-color: rgb(56, 54, 54);
+        background-color: rgb(96, 96, 96);
 }
 
 .template-image {
@@ -110,7 +111,7 @@ display: flex;
 }
 .Rside-gallery {
     float: right;
-background-color: blueviolet;
+background-color: rgb(96, 96, 96);;
     display: flex;
     flex-direction: column;
     /* Stack children vertically */
@@ -135,7 +136,7 @@ background-color: blueviolet;
 {
     flex-grow: 1;
     /* Use remaining space */
-    background-color: goldenrod;
+    background-color: rgb(96, 96, 96);
     overflow: auto;
 
 }
@@ -146,14 +147,14 @@ background-color: blueviolet;
     resize: vertical;
 }
 .topPanel{
-background-color: chocolate;
+background-color: rgb(96, 96, 96);
 /* min-height: 5%; */
 height: 5%;
 width: 100%;
 
 }
 #konvaCanvas {
-background-color: chartreuse;
+/* background-color: chartreuse; */
 height: 100%;
 width: 100%;
 overflow: hidden;
