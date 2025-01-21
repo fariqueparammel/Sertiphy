@@ -25,7 +25,7 @@
         </div>
         <div id="konvaCanvas">
 
-            <div id="container"></div>
+            <div id="container"> </div>
         </div>
 
 

@@ -61,6 +61,7 @@ main {
     /* Use remaining space */
     background-color: goldenrod;
     overflow: auto;
+    /* padding: 3%; */
     /* resize: vertical;
     height: 50%;
     width: 100%;
@@ -82,6 +83,12 @@ display: flex;
     border-radius: 12%;
     background-color: rgb(56, 54, 54);
 }
+.uploaded-image-container{
+    margin: 7px;
+    display: flex;
+        border-radius: 12%;
+        background-color: rgb(56, 54, 54);
+}
 
 .template-image {
     border-radius: 12%;
@@ -92,8 +99,15 @@ display: flex;
     padding: 2%;
     border-radius: 12%;
 }
+.uploaded-image-button{
+    padding: 2%;
+    border-radius: 12%;
+}
 
+.uploaded-template-image{
+    border-radius: 12%;
 
+}
 .Rside-gallery {
     float: right;
 background-color: blueviolet;
@@ -133,6 +147,7 @@ background-color: blueviolet;
 }
 .topPanel{
 background-color: chocolate;
+/* min-height: 5%; */
 height: 5%;
 width: 100%;
 
@@ -141,6 +156,7 @@ width: 100%;
 background-color: chartreuse;
 height: 100%;
 width: 100%;
+overflow: hidden;
 }
 
 #addTemplateButton{

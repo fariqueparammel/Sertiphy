@@ -24,11 +24,15 @@ function fitStageIntoParentContainer() {
     stage.width(sceneWidth * scalew);
     stage.height(sceneHeight * scaleh);
     stage.scale({ x: scalew, y: scaleh });
+    stage.x((containerWidth - sceneWidth * scalew) / 2);
+    stage.y((containerHeight - sceneHeight * scaleh) / 2);
+
+    // Force the layer to redraw (important for scaling)
+    layer.batchDraw();
 }
 
-window.addEventListener("resize", fitStageIntoParentContainer);
-
 fitStageIntoParentContainer();
+window.addEventListener("resize", fitStageIntoParentContainer);
 
 function getCurrentImageUrl(imageUrl) {
     console.log("file url", imageUrl);
@@ -53,11 +57,6 @@ document.querySelectorAll(".image-button").forEach((button) => {
     });
 });
 
-// document.addEventListener('alpine:init', () => {
-//     Alpine.data('templateUpload', () => ({
-
-//     }))
-// })
 document
     .getElementById("templateButton")
     .addEventListener("click", function () {
@@ -69,7 +68,54 @@ document
     .addEventListener("change", function (event) {
         const file = event.target.files[0];
         if (file) {
-            console.log("File selected:", file.name);
-            // You can handle the file upload or other actions here
+            // console.log("File selected:", file);
+            uploadedImageDisplay(file);
         }
     });
+function uploadedImageDisplay(file) {
+    i += 1;
+    const uploadedImage = document.querySelector(".uploaded-image-button");
+
+    // Clone the button element (including its child elements like <img>)
+    const cloneUploadedImageElement = uploadedImage.cloneNode(true);
+
+    // Show the cloned button
+    cloneUploadedImageElement.style.display = "block";
+
+    // Find the <img> element inside the cloned button
+    const clonedImageElement = cloneUploadedImageElement.querySelector(
+        ".uploaded-template-image"
+    );
+    console.log(clonedImageElement);
+    // Set the <img> element's src to the uploaded file's URL
+    const imageUrl = URL.createObjectURL(file);
+    console.log(imageUrl);
+    clonedImageElement.src = imageUrl;
+
+    clonedImageElement.style.display = "block";
+    // const newDiv = document.createElement("div");
+
+    // newDiv.classList.add("uploaded-image-container");
+    // document.body.appendChild(newDiv);
+    // const lastImageContainer = document.querySelector("div.uploaded-image-container:last-of-type");// Correct selector
+    // const lastMarkElement = document.querySelector(lastImageContainer);
+    // Append the cloned button (with the updated <img>) to the container
+
+    const newDiv = document.createElement("div");
+
+    newDiv.classList.add("uploaded-image-container");
+    newDiv.id = "div" + Date.now(); //using timestamp for unique div id
+    document.getElementById("upload-template").appendChild(newDiv);
+    document
+        .getElementById("div" + Date.now())
+        .appendChild(cloneUploadedImageElement);
+
+    // Create a URL for the uploaded file
+    // const imageUrl = URL.createObjectURL(file);
+
+    // // Set the image source to the uploaded file
+    // uploadImageDisplay.src = imageUrl;
+
+    // // Optional: Log the file name
+    // console.log("File selected:", file.name);
+}
