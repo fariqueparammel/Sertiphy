@@ -35,7 +35,6 @@ fitStageIntoParentContainer();
 window.addEventListener("resize", fitStageIntoParentContainer);
 
 function getCurrentImageUrl(imageUrl) {
-    console.log("file url", imageUrl);
     var imageObj = new Image();
     imageObj.onload = function () {
         var templateImage = new Konva.Image({
@@ -85,20 +84,13 @@ function uploadedImageDisplay(file) {
     const clonedImageElement = cloneUploadedImageElement.querySelector(
         ".uploaded-template-image"
     );
-    console.log(clonedImageElement);
+
     // Set the <img> element's src to the uploaded file's URL
     const imageUrl = URL.createObjectURL(file);
-    console.log(imageUrl);
+
     clonedImageElement.src = imageUrl;
-
+    clonedImageElement.setAttribute("data-file-url", imageUrl); //to set the image url as an attribute called data-file-url
     clonedImageElement.style.display = "block";
-    // const newDiv = document.createElement("div");
-
-    // newDiv.classList.add("uploaded-image-container");
-    // document.body.appendChild(newDiv);
-    // const lastImageContainer = document.querySelector("div.uploaded-image-container:last-of-type");// Correct selector
-    // const lastMarkElement = document.querySelector(lastImageContainer);
-    // Append the cloned button (with the updated <img>) to the container
 
     const newDiv = document.createElement("div");
 
@@ -108,13 +100,22 @@ function uploadedImageDisplay(file) {
     document
         .getElementById("div" + Date.now())
         .appendChild(cloneUploadedImageElement);
+    displayUploadedTemplate(); //method to display the uploaded image on click
+}
+// if (
+//     document
+//         .getElementById("test")
+//         .classList.contains("uploaded-image-button")
+// ) {
 
-    // Create a URL for the uploaded file
-    // const imageUrl = URL.createObjectURL(file);
+function displayUploadedTemplate() {
+    //query selector on img element since data-file-url attribute is attached to img element
 
-    // // Set the image source to the uploaded file
-    // uploadImageDisplay.src = imageUrl;
+    document.querySelectorAll(".uploaded-template-image").forEach((button) => {
+        button.addEventListener("click", function () {
+            const imageUrl = this.getAttribute("data-file-url");
 
-    // // Optional: Log the file name
-    // console.log("File selected:", file.name);
+            getCurrentImageUrl(imageUrl);
+        });
+    });
 }

@@ -24,10 +24,13 @@
             </div>
         @endforeach
     @endif
-    <div class="uploaded-image-container">
-        <x-filament::button class="uploaded-image-button" style="display: none;">
-            <img alt="Upload Template" class="uploaded-template-image" loading="lazy" style="display: none;">
-        </x-filament::button>
+    <div id="test">
+        <div class="uploaded-image-container">
+            <x-filament::button class="uploaded-image-button" style="display: none;">
+                <img alt="Upload Template" class="uploaded-template-image" loading="lazy" style="display: none;">
+            </x-filament::button>
+
+        </div>
 
     </div>
 
