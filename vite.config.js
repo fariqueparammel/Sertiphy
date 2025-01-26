@@ -12,6 +12,7 @@ export default defineConfig({
                 "resources/js/app.js",
                 "public/css/custom-sidebar-topbar.css",
                 "public/js/filament/konvaScript.js",
+                "public/js/filament/placeDataInCanvas.js",
             ],
             refresh: true,
         }),

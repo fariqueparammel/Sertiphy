@@ -44,6 +44,8 @@ main {
     overflow: auto;
     width: 15%;
     height: calc(100vh - 4rem);
+    border: solid 1px;
+    border-color: rgb(135, 135, 135);
     /* border: 3px solid #73AD21; */
 }
 
@@ -53,7 +55,9 @@ main {
     width: 100%;
     resize: vertical;
 
-    background-color:  rgb(96, 96, 96);
+    /* background-color:  rgb(96, 96, 96); */
+    border: solid 1px;
+    border-color: rgb(135, 135, 135);
 }
 
 #upload-template {
@@ -66,7 +70,9 @@ main {
     height: 50%;
     width: 100%;
    float: bottom;*/
-   background-color: rgb(96, 96, 96);
+   /* background-color: rgb(96, 96, 96); */
+   border: solid 1px;
+    border-color: rgb(135, 135, 135);
 
 
 }
@@ -88,7 +94,7 @@ display: flex;
     margin: 7px;
     display: flex;
         border-radius: 12%;
-        background-color: rgb(96, 96, 96);
+        /* background-color: rgb(96, 96, 96); */
 }
 
 .template-image {
@@ -111,9 +117,11 @@ display: flex;
 }
 .Rside-gallery {
     float: right;
-background-color: rgb(96, 96, 96);;
+
     display: flex;
     flex-direction: column;
+    border: solid 1px;
+    border-color: rgb(135, 135, 135);
     /* Stack children vertically */
     /* height: calc(100vh - 4rem); */
     /* Full height of the viewport */
@@ -136,8 +144,10 @@ background-color: rgb(96, 96, 96);;
 {
     flex-grow: 1;
     /* Use remaining space */
-    background-color: rgb(96, 96, 96);
+    /* background-color: green; */
     overflow: auto;
+    border: solid 1px;
+    border-color: rgb(135, 135, 135);
 
 }
 .sample-draggable-data{
@@ -145,12 +155,16 @@ background-color: rgb(96, 96, 96);;
     height: 50%;
     width: 100%;
     resize: vertical;
+    border: solid 1px;
+    border-color: rgb(135, 135, 135);
 }
 .topPanel{
-background-color: rgb(96, 96, 96);
+/* background-color: red; */
 /* min-height: 5%; */
 height: 5%;
 width: 100%;
+border: solid 1px;
+border-color: rgb(135, 135, 135);
 
 }
 #konvaCanvas {
@@ -173,3 +187,27 @@ overflow: hidden;
 
     margin: 50%;
 } */
+.OrderedDataList
+{
+    /* list-style-type: 1;
+    list-style-position: outside; */
+margin: 3%;
+padding: 2%;
+}
+.listData
+{
+    border-radius: 5%;
+    cursor: -webkit-grab;
+    cursor: grab;
+    /* border: solid #000; */
+    margin: 2%;
+text-align: center;
+
+display: block;
+/* background-color: rgb(62, 61, 61); */
+
+}
+li.listData:hover
+{
+    background-color: rgb(135, 135, 135);
+}

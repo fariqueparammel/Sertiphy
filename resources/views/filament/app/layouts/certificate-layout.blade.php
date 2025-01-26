@@ -34,7 +34,10 @@
 
         <div class="ai-otherfeatures"></div>
 
-        <div class="sample-draggable-data"></div>
+        <div class="sample-draggable-data">
+
+            @yield('data')
+        </div>
 
     </div>
 

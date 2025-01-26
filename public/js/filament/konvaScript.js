@@ -10,7 +10,7 @@ var stage = new Konva.Stage({
 
 var layer = new Konva.Layer();
 stage.add(layer);
-
+export default { stage, layer };
 function fitStageIntoParentContainer() {
     var container = document.querySelector("#konvaCanvas");
 

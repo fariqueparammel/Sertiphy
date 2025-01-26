@@ -60,7 +60,8 @@ class ProjectsResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
-
+                Tables\Actions\ViewAction::make(),
+                // i think need to write fucntion here the the view button should take the userers project id
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
