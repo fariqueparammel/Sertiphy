@@ -9,11 +9,11 @@ document.addEventListener("DOMContentLoaded", function () {
             let data = event.target;
             // console.log(data);
             let key = data.querySelector("#data-container").getAttribute("key");
-            console.log(key);
+            // console.log(key);
             let value = data
                 .querySelector("#data-container")
                 .getAttribute("value");
-            console.log(value);
+            // console.log(value);
             var initialPosX = konvaObject.stage.width() / 2 - 50;
             var initialPosY = konvaObject.stage.height() / 2 - 25;
             // can make the value toggle between heading or value to be display based ona toggle button with if

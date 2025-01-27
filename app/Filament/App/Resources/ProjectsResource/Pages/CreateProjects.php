@@ -23,11 +23,12 @@ class CreateProjects extends CreateRecord
     protected function getRedirectUrl(): string
     {
         $project_id = $this->record->id;
+        $project_name = $this->record->Project;
         $sendProjectId = new storeProjectIdService;
         $sendProjectId->getProjectId($project_id);
         session_start();
         //using a session to store the proejctId
         Session::put('projectId',  $project_id);
-        return $this->getResource()::getUrl('view');
+        return $this->getResource()::getUrl('choose', [$project_name]);
     }
 }
