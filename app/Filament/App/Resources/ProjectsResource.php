@@ -130,6 +130,7 @@ class ProjectsResource extends Resource
             'choose' => Pages\OpenProject::route('/choose/{Project}'),
             // 'test' => Pages\OpenProject::route('/choose'),
             'edit' => Pages\EditProjects::route('/{record}/edit'),
+            'data-entry' => Pages\ManualDataEntry::route('/data-entry'),
             // 'view' => Pages\OpenProject::route('/choose'),
             //
         ];

@@ -32,9 +32,11 @@
             </x-filament::button>
 
             <!-- Manual Data Entry Button (Will remain as is for now) -->
-            <x-filament::button color="primary" id="manualDataEntryBtn">
+            <x-filament::button wire:click="manualDataEntry" color="primary" id="manualDataEntryBtn">
                 Manual Data Entry
             </x-filament::button>
+
+            {{-- <x-filament-panels::form.actions :actions="$this->getCachedFormActions()" :full-width="$this->hasFullWidthFormActions()" /> --}}
 
             <!-- Display the name of the chosen file -->
             <div id="fileName" class="mt-2 text-sm text-gray-500 hidden"></div>
@@ -44,14 +46,28 @@
                 Submit
             </x-filament::button>
 
+
+
         </div>
+        {{-- @if ($showForm)
+            <x-filament-panels::form id="form">
+                {{ $this->form }}
+            </x-filament-panels::form>
+        @endif --}}
+
     </form>
     <!-- JavaScript to control visibility of the Submit button and file name display -->
     <script>
         const fileInput = document.getElementById('uploadfile');
         const submitButton = document.getElementById('submitBtn');
         const fileNameDisplay = document.getElementById('fileName');
+        // const manualDataEntryBtn = document.getElementById('manualDataEntryBtn');
+        // const form = document.getElementById('form');
+        // manualDataEntryBtn.addEventListener('click', function() {
+        //     form.style.display = "block";
 
+
+        // })
         // Toggle visibility of submit button and display file name based on file selection
         fileInput.addEventListener('change', function() {
             if (fileInput.files.length > 0) {
