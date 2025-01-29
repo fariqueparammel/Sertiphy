@@ -26,7 +26,7 @@ class OpenProject extends Page  implements HasForms, HasActions
     protected ?string $heading = "Let's start crafting";
     protected static ?string $title = 'Data';
 
-    public $showForm = false;
+    // public $showForm = false;
 
     public function manualDataEntry()
     {
@@ -37,28 +37,28 @@ class OpenProject extends Page  implements HasForms, HasActions
     }
 
 
-    public function getFormSchema(): array
-    {
-        return [
-            KeyValue::make('Enter Data')
-                ->keyLabel('Property name')
+    // public function getFormSchema(): array
+    // {
+    //     return [
+    //         KeyValue::make('Enter Data')
+    //             ->keyLabel('Property name')
 
 
-        ];
-    }
+    //     ];
+    // }
 
-    public function getFormActions(): array
-    {
-        return [
-            Action::make('greet')
-                ->action(function () {
-                    Notification::make()
-                        ->title(__('Hello ' . $this->name))
-                        ->success()
-                        ->send();
-                }),
-        ];
-    }
+    // public function getFormActions(): array
+    // {
+    //     return [
+    //         Action::make('greet')
+    //             ->action(function () {
+    //                 Notification::make()
+    //                     ->title(__('Hello ' . $this->name))
+    //                     ->success()
+    //                     ->send();
+    //             }),
+    //     ];
+    // }
     // protected function layout(): string
     // {
     //     // Use a layout without the sidebar
