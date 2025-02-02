@@ -1,7 +1,7 @@
 <div class="main-layout">
 
 
-    <div class= "Lside-gallery">
+    <div class="Lside-gallery">
         {{-- <div id="container"> --}}
         <div id="preset-template" class="Lside-gallery-preset-template">
 
@@ -21,7 +21,12 @@
     </div>
     <div class="stateManagement-container-canvas">
         <div class="topPanel">
-
+            <x-filament::button wire:click="clear">
+                clear
+            </x-filament::button>
+            <x-filament::button class="uploaded-image-button" style="display: none;">
+                generate
+            </x-filament::button>
         </div>
         <div id="konvaCanvas">
 
