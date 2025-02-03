@@ -13,6 +13,7 @@ export default defineConfig({
                 "public/css/custom-sidebar-topbar.css",
                 "public/js/filament/konvaScript.js",
                 "public/js/filament/placeDataInCanvas.js",
+                "public/js/filament/manualDataEntry.js",
             ],
             refresh: true,
         }),
