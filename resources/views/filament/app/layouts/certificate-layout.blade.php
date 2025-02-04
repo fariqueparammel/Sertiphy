@@ -24,7 +24,7 @@
             <x-filament::button wire:click="clear">
                 clear
             </x-filament::button>
-            <x-filament::button class="uploaded-image-button" style="display: none;">
+            <x-filament::button class="generate" >
                 generate
             </x-filament::button>
         </div>

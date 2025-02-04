@@ -1,5 +1,6 @@
 import Konva from "konva";
 import konvaObject from "./konvaScript.js";
+import { track_position } from "./btnfunctions.js";
 
 document.addEventListener("DOMContentLoaded", function () {
     let selectedText = null;
@@ -97,6 +98,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Enable dragging only after transformer is added
         textNode.draggable(true);
+        track_position(textNode,key);
 
         konvaObject.layer.batchDraw(); // Redraw the layer after transformer is added
     }
