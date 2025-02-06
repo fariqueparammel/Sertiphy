@@ -10,10 +10,10 @@ use PhpOffice\PhpSpreadsheet\Calculation\Logical\Boolean;
 
 class CertificateDesigner extends Page
 {
-    // public static function shouldRegisterNavigation(): bool
-    // {
-    //     return false;
-    // }
+    public static function shouldRegisterNavigation(): bool
+    {
+        return false;
+    }
     // protected static ?string $navigationIcon = 'heroicon-o-document-text';
 
     protected static string $view = 'filament.app.pages.certificate-designer';

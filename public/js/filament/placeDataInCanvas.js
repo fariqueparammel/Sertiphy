@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Handle clicks on the text creation list
     document.querySelectorAll(".listData").forEach((item) => {
         item.addEventListener("click", function (event) {
+
             // If the click target is the "X" button, stop the event from propagating
             if (event.target.classList.contains("remove-btn")) {
                 return; // Skip processing the creation logic when the X button is clicked
@@ -27,6 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const initialPosY = konvaObject.stage.height() / 2 - 25;
 
             const complexText = new Konva.Text({
+
                 x: initialPosX,
                 y: initialPosY,
                 text: value,
