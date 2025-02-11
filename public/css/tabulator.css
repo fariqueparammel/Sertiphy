@@ -1,0 +1,27 @@
+
+
+.fi-main {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.main-layout {
+    height: calc(100vh - 4rem);
+    overflow: auto;
+    /* background-color: antiquewhite; */
+    /* display: flex; */
+}
+
+main {
+    /* max-height: none !important; */
+    max-width: none !important;
+    /* Overrides the max-w-7xl restriction */
+    width: 100%;
+    padding-left: 0 !important;
+    /* overrides both padding*/
+    padding-right: 0 !important;
+}
+/* #example-table{
+
+  } */
+

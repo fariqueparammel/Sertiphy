@@ -34,8 +34,9 @@ class luckysheetServiceprovider extends ServiceProvider
 
                     return Blade::render('
 
+<link href="https://unpkg.com/tabulator-tables/dist/css/tabulator.min.css" rel="stylesheet">
 
-                    @vite(["public/js/filament/manualDataEntry.js"])
+                    @vite(["public/js/filament/manualDataEntry.js","public/css/tabulator.css"])
                 ');
 
 

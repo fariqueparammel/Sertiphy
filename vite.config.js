@@ -14,6 +14,7 @@ export default defineConfig({
                 "public/js/filament/konvaScript.js",
                 "public/js/filament/placeDataInCanvas.js",
                 "public/js/filament/manualDataEntry.js",
+                "public/css/tabulator.css",
             ],
             refresh: true,
         }),
