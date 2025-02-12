@@ -37,6 +37,7 @@ class CertificateDesigner extends Page
 
         $imagePath = Storage::disk('public')->files('templatesImages');
         // dd($imagePath);
+        
         foreach ($imagePath as $imageFullpath) {
             // $file_path = Storage::url($imageFullpath);
             // $url = asset($file_path);
