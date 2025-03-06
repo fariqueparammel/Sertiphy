@@ -15,7 +15,8 @@ class FieldData extends Model
     protected $primaryKey = 'id';
     protected $fillable = [
         'project_id',
-        'fieldData'
+        'fieldData',
+        'ProjectStatus',
     ];
 
 

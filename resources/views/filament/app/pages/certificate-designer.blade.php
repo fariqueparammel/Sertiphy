@@ -12,3 +12,7 @@
 @section('upload-template')
     @include('filament.app.components.upload-template')
 @endsection
+
+@section('data')
+    @include('filament.app.components.firstRowData', ['rowData' => $firstRowData])
+@endsection

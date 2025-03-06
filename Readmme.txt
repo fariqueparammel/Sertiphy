@@ -1,0 +1,22 @@
+Command to know
+compose dump-autoload
+php artisan optimize:clear
+php artisan cache:clear
+php artisan route:clear
+php artisan route:list
+
+configs and commands to run while clonning the project
+
+php artisan storage:link since  , assets are stored locally at storage\public\templateImages
+
+install mysql community edition or something else or xamp ,
+install table plus for db gui
+php artisan serve   // to serev the project
+install nodejs
+run -    npm i //in project folder
+run -   composer install  // in project folder
+run npm run dev   // to start vite
+
+thinking about rest will be updated....
+
+

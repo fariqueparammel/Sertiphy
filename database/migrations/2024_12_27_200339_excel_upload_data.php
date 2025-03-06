@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreign('project_id')
                 ->references('id')->on('projectname')->onDelete('CASCADE');
             $table->json('fieldData');
+            $table->boolean('ProjectStatus')->nullable();
             $table->timestamps();
         });
     }

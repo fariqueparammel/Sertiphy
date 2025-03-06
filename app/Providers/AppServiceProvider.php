@@ -54,12 +54,26 @@ class AppServiceProvider extends ServiceProvider
                 if (request()->routeIs('filament.app.pages.certificate-designer')) {
                     // Use Vite's helper to generate the asset tags
                     return Blade::render('
-                        @vite(["public/css/custom-sidebar-topbar.css", "public/js/filament/konvaScript.js"])
+                        @vite(["public/css/custom-sidebar-topbar.css", "public/js/filament/konvaScript.js", "public/js/filament/placeDataInCanvas.js"])
                     ');
                 }
             }
         );
+        // FilamentView::registerRenderHook(
+        //     PanelsRenderHook::HEAD_END,
+        //     function () {
+        //         if (request()->routeIs('/projects/data-entry')) {
+        //             // Use Vite's helper to generate the asset tags
 
+
+        //             return Blade::render(
+
+
+        //                 '   @vite([ "public/js/filament/manualDataEntry.js"]'
+        //             );
+        //         }
+        //     }
+        // );
         // FilamentView::registerRenderHook(
 
         //     PanelsRenderHook::CONTENT_START,
