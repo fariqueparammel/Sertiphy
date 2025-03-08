@@ -229,3 +229,24 @@ li.listData:hover {
     justify-content: flex-end; /* Align the button to the right */
     flex-grow: 1; /* Make the div take available space so the button aligns to the right */
 }
+
+#fontSelector, 
+#colorPicker, 
+#fontSizeInput {
+    width: 80px; /* Reduce width */
+    height: 20px; /* Reduce height */
+    font-size: 12px; /* Smaller font */
+    padding: 2px;
+}
+
+#colorPicker {
+    width: 30px; /* Make color picker smaller */
+    height: 25px;
+    padding: 0;
+    border: none;
+}
+
+#fontSizeInput {
+    width: 50px; /* Slightly wider for better usability */
+    text-align: center;
+}

@@ -92,6 +92,7 @@ function uploadedImageDisplay(file) {
     document.getElementById("upload-template").appendChild(newDiv);
     document.getElementById("div" + Date.now()).appendChild(cloneUploadedImageElement);
     displayUploadedTemplate();
+    
 }
 
 function displayUploadedTemplate() {
