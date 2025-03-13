@@ -66,23 +66,31 @@ document.querySelectorAll(".image-button").forEach((button) => {
     });
 });
 
-document.getElementById("templateButton").addEventListener("click", function () {
-    document.getElementById("templateImage").click();
-});
+document
+    .getElementById("templateButton")
+    .addEventListener("click", function () {
+        document.getElementById("templateImage").click();
+    });
 
-document.getElementById("templateImage").addEventListener("change", function (event) {
-    const file = event.target.files[0];
-    if (file) {
-        uploadedImageDisplay(file);
-    }
-});
+document
+    .getElementById("templateImage")
+    .addEventListener("change", function (event) {
+        const file = event.target.files[0];
+        if (file) {
+            console.log(file);
+            uploadedImageDisplay(file);
+        }
+    });
 
 function uploadedImageDisplay(file) {
     const uploadedImage = document.querySelector(".uploaded-image-button");
     const cloneUploadedImageElement = uploadedImage.cloneNode(true);
     cloneUploadedImageElement.style.display = "block";
-    const clonedImageElement = cloneUploadedImageElement.querySelector(".uploaded-template-image");
+    const clonedImageElement = cloneUploadedImageElement.querySelector(
+        ".uploaded-template-image"
+    );
     const imageUrl = URL.createObjectURL(file);
+
     clonedImageElement.src = imageUrl;
     clonedImageElement.setAttribute("data-file-url", imageUrl);
     clonedImageElement.style.display = "block";
@@ -90,7 +98,9 @@ function uploadedImageDisplay(file) {
     newDiv.classList.add("uploaded-image-container");
     newDiv.id = "div" + Date.now();
     document.getElementById("upload-template").appendChild(newDiv);
-    document.getElementById("div" + Date.now()).appendChild(cloneUploadedImageElement);
+    document
+        .getElementById("div" + Date.now())
+        .appendChild(cloneUploadedImageElement);
     displayUploadedTemplate();
 }
 

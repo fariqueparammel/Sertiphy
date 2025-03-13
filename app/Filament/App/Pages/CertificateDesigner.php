@@ -35,15 +35,17 @@ class CertificateDesigner extends Page
     public static function getImage()
     {
 
-        $imagePath = Storage::disk('public')->files('templatesImages');
+        $imagePath = Storage::files('preset-templates');
         // dd($imagePath);
-        
+        //  Storage::disk('public')->files('templatesImages');
+        // dd($imagePath);
+
         foreach ($imagePath as $imageFullpath) {
-            // $file_path = Storage::url($imageFullpath);
+            $file_path = Storage::url($imageFullpath);
             // $url = asset($file_path);
             // $urls[] = storage_path($imageFullpath);
 
-            $urls[] = $imageFullpath;
+            $urls[] = $file_path;
 
             //testing files variable
             $files = $urls;
