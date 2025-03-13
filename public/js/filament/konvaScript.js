@@ -102,6 +102,7 @@ function uploadedImageDisplay(file) {
         .getElementById("div" + Date.now())
         .appendChild(cloneUploadedImageElement);
     displayUploadedTemplate();
+    
 }
 
 function displayUploadedTemplate() {

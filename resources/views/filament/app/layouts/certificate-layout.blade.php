@@ -21,12 +21,25 @@
     </div>
     <div class="stateManagement-container-canvas">
         <div class="topPanel">
-            <x-filament::button wire:click="clear">
+        <label for="fontSelector">Font:</label>
+        <select id="fontSelector"></select>
+        <script type="module" src="{{ asset('js/filament/fontstyle.js') }}"></script>
+        <label for="colorPicker">Color:</label>
+        <input type="color" id="colorPicker">
+        <label for="fontSizeInput">Size:</label>
+        <input type="number" id="fontSizeInput" value="24" min="1">
+       
+            <x-filament::button class="clear">
                 clear
             </x-filament::button>
-            <x-filament::button class="generate" >
+            <x-filament::button class="generate">
                 generate
             </x-filament::button>
+
+
+            <!-- Text Preview -->
+            <!-- <div class="text-preview">The quick </div> -->
+
         </div>
         <div id="konvaCanvas">
 
@@ -36,7 +49,7 @@
 
     </div>
     <div class="Rside-gallery">
-
+       
         <div class="ai-otherfeatures"></div>
 
         <div class="sample-draggable-data">
@@ -46,5 +59,5 @@
 
     </div>
 
-
+    
 </div>
