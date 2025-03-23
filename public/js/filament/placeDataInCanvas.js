@@ -1,11 +1,11 @@
 import Konva from "konva";
 import konvaObject from "./konvaScript.js";
 // import { track_position } from "./btnfunctions.js";
-
-
+let imageFiles = [];
+// let nameCount = 0;
 let selectedText = null;
-const fontSizeInput = document.getElementById('fontSizeInput');
-fontSizeInput.addEventListener('input', () => {
+const fontSizeInput = document.getElementById("fontSizeInput");
+fontSizeInput.addEventListener("input", () => {
     if (selectedText) {
         const selectedFontSize = parseInt(fontSizeInput.value, 10);
         if (selectedFontSize > 0) {
@@ -15,21 +15,37 @@ fontSizeInput.addEventListener('input', () => {
     }
 });
 document.addEventListener("DOMContentLoaded", function () {
-
     // Function to dynamically load Google Fonts
     function loadGoogleFonts(fonts) {
         const link = document.createElement("link");
         link.rel = "stylesheet";
-        link.href = `https://fonts.googleapis.com/css2?family=${fonts.map(f => f.replace(/ /g, "+")).join("&family=")}&display=swap`;
+        link.href = `https://fonts.googleapis.com/css2?family=${fonts
+            .map((f) => f.replace(/ /g, "+"))
+            .join("&family=")}&display=swap`;
         document.head.appendChild(link);
     }
 
     // List of fonts including Google Fonts
     const fonts = [
-        'Arial', 'Courier New', 'Georgia', 'Times New Roman', 'Verdana',
-        'Trebuchet MS', 'Lucida Console', 'Comic Sans MS', 'Tahoma',
-        'Garamond', 'Impact', 'Century Gothic', 'Brush Script MT',
-        'Roboto', 'Lobster', 'Open Sans', 'Pacifico', 'Poppins', 'Montserrat'
+        "Arial",
+        "Courier New",
+        "Georgia",
+        "Times New Roman",
+        "Verdana",
+        "Trebuchet MS",
+        "Lucida Console",
+        "Comic Sans MS",
+        "Tahoma",
+        "Garamond",
+        "Impact",
+        "Century Gothic",
+        "Brush Script MT",
+        "Roboto",
+        "Lobster",
+        "Open Sans",
+        "Pacifico",
+        "Poppins",
+        "Montserrat",
     ];
 
     // Load only the Google Fonts
@@ -37,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
     loadGoogleFonts(googleFonts);
 
     // Ensure the font selector exists before running script
-    const fontSelector = document.getElementById('fontSelector');
+    const fontSelector = document.getElementById("fontSelector");
 
     if (!fontSelector) {
         console.error("Font selector element not found!");
@@ -46,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Populate font selector
     fonts.forEach((font) => {
-        const option = document.createElement('option');
+        const option = document.createElement("option");
         option.value = font;
         option.textContent = font;
         option.style.fontFamily = font;
@@ -54,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // Change font style of selected text only
-    fontSelector.addEventListener('change', () => {
+    fontSelector.addEventListener("change", () => {
         if (selectedText) {
             selectedText.fontFamily(fontSelector.value);
             selectedText.getLayer().batchDraw(); // Redraw to reflect changes
@@ -73,23 +89,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
     colorPicker.addEventListener("input", function () {
         if (selectedText) {
-            selectedText.fill(colorPicker.value);  // Change text color
-            konvaObject.layer.batchDraw();  // Redraw to reflect changes
+            selectedText.fill(colorPicker.value); // Change text color
+            konvaObject.layer.batchDraw(); // Redraw to reflect changes
         } else {
             console.warn("No text selected!");
         }
     });
 });
 
-
 document.addEventListener("DOMContentLoaded", function () {
-
     const textTransformers = {}; // Store text-transformer pairs
-
 
     document.querySelectorAll(".listData").forEach((item) => {
         item.addEventListener("click", function (event) {
-
             // If the click target is the "X" button, stop the event from propagating
             if (event.target.classList.contains("remove-btn")) {
                 return; // Skip processing the creation logic when the X button is clicked
@@ -101,14 +113,19 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             const data = event.target;
-            const key = data.closest('li').querySelector(".remove-btn").getAttribute("data-key");
-            const value = data.closest('li').querySelector(".remove-btn").getAttribute("data-value");
+            const key = data
+                .closest("li")
+                .querySelector(".remove-btn")
+                .getAttribute("data-key");
+            const value = data
+                .closest("li")
+                .querySelector(".remove-btn")
+                .getAttribute("data-value");
 
             const initialPosX = konvaObject.stage.width() / 2 - 50;
             const initialPosY = konvaObject.stage.height() / 2 - 25;
 
             const complexText = new Konva.Text({
-
                 x: initialPosX,
                 y: initialPosY,
                 text: value,
@@ -141,7 +158,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function removeAllTransformers() {
         // Remove all transformers from all text nodes
-        Object.values(textTransformers).forEach(transformer => transformer.destroy());
+        Object.values(textTransformers).forEach((transformer) =>
+            transformer.destroy()
+        );
         // Clear the transformer store after removal
         for (const key in textTransformers) {
             delete textTransformers[key];
@@ -216,25 +235,29 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
-var x = [], y = [], fontSize = [], fontColor = [], fontStyle = [];
+var x = [],
+    y = [],
+    fontSize = [],
+    fontColor = [],
+    fontStyle = [];
 
 export function track_position(text_element, key) {
-    text_element.on('dragmove', function () {
+    text_element.on("dragmove", function () {
         x[key] = text_element.x();
         y[key] = text_element.y();
     });
 
-    text_element.on('transform', function () {
+    text_element.on("transform", function () {
         fontSize[key] = text_element.fontSize();
     });
 
-    text_element.on('click', function () {
+    text_element.on("click", function () {
         fontColor[key] = text_element.fill();
         fontSize[key] = text_element.fontSize();
         fontStyle[key] = text_element.fontFamily();
     });
 }
-fontSizeInput.addEventListener('input', () => {
+fontSizeInput.addEventListener("input", () => {
     if (selectedText) {
         const selectedFontSize = parseInt(fontSizeInput.value, 10);
         if (selectedFontSize > 0) {
@@ -251,7 +274,7 @@ colorPicker.addEventListener("input", function () {
         konvaObject.layer.batchDraw();
     }
 });
-fontSelector.addEventListener('change', () => {
+fontSelector.addEventListener("change", () => {
     if (selectedText) {
         selectedText.fontFamily(fontSelector.value);
         fontStyle[selectedText.name()] = fontSelector.value; // Update tracking data
@@ -260,19 +283,123 @@ fontSelector.addEventListener('change', () => {
 });
 // Event listener for Generate button
 document.querySelector(".generate").addEventListener("click", function () {
+    let dataArray = [];
     for (let key in x) {
-        console.log(`Key: ${key}, X: ${x[key]}, Y: ${y[key]}, Font Size: ${fontSize[key]}, Color: ${fontColor[key]}, Font Style: ${fontStyle[key]}`);
+        const properties = {
+            key: key,
+            x: x[key],
+            y: y[key],
+            fontSize: fontSize[key],
+            fontColor: fontColor[key],
+            fontStyle: fontStyle[key],
+        };
+        // console.log(properties);
+        dataArray.push(properties);
     }
+    // console.log(dataArray);
+    const jsonObject = JSON.stringify(dataArray);
+    console.log(jsonObject);
+    let storage = {};
+    Object.keys(sessionStorage).forEach((key) => {
+        storage[key] = sessionStorage.getItem(key);
+    });
+
+    function dataUriToFile(dataUri, fileName) {
+        const parts = dataUri.split(";base64,");
+        const contentType = parts[0].split(":")[1]; // e.g., 'image/png'
+        const raw = window.atob(parts[1]); // Decode Base64
+        const rawLength = raw.length;
+        const uInt8Array = new Uint8Array(rawLength);
+
+        for (let i = 0; i < rawLength; ++i) {
+            uInt8Array[i] = raw.charCodeAt(i);
+        }
+
+        // Create a Blob from the binary data
+        const blob = new Blob([uInt8Array], { type: contentType });
+        // const fileName = `Image${nameCount}`;
+        // nameCount++;
+        // Wrap the Blob in a File object
+        return new File([blob], fileName, { type: contentType });
+    }
+
+    Object.values(storage).forEach((dataUri, index) => {
+        const fileName = `image_${index}.${
+            dataUri.split(";")[0].split("/")[1]
+        }`;
+        const file = dataUriToFile(dataUri, fileName);
+        imageFiles.push(file);
+        // console.log(imageFiles);
+    });
+    // console.log(storage);
+    sessionStorage.clear();
+
+    // console.log(sessionStorage.getItem("image0"));
+
+    async function sendImages() {
+        const formData = new FormData();
+
+        // Append each file to FormData
+        imageFiles.forEach((file, index) => {
+            formData.append("images[]", file);
+            // Use 'images[]' to send as an array
+        });
+        // const userProjectId= JSON.stringify{user_id:"$user_id",projectId:"$currentProjectId" };
+        formData.append("jsonObject", jsonObject);
+        formData.append("project_id", currentProjectId);
+        formData.append("user_id", user_id);
+        console.log([...formData.entries()]);
+        try {
+            // Send FormData to the server using fetch
+            // debugger;
+            const response = await fetch("/api/uploadDataApi", {
+                method: "POST",
+                headers: {
+                    // "X-CSRF-TOKEN": document
+                    //     .querySelector('meta[name="csrf-token"]')
+                    //     ?.getAttribute("content"), // Use optional chaining to prevent errors if null
+                    // "content-type": "multipart/form-data",
+                    Accept: "application/json",
+                },
+                body: formData,
+
+                // No need to manually set Content-Type with FormData
+            });
+
+            // const result = await response.json();
+
+            debugger;
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            const result = response;
+            // console.log("Upload response:", result);
+
+            console.log("Server Response:" + result);
+        } catch (error) {
+            console.error("Error uploading images:", error);
+        }
+    }
+
+    // Call the function to send images
+    sendImages();
 });
+// const currentProjectIdd =
+// debugger;
+console.log("Current Project ID:", currentProjectId);
+console.log("Current user ID:", user_id);
 document.querySelector(".clear").addEventListener("click", function () {
+    // sessionStorage.clear();
     konvaObject.layer.destroyChildren(); // Remove all objects from the layer
     konvaObject.layer.batchDraw(); // Redraw the canvas to reflect changes
 
     // Clear stored text properties
     selectedText = null;
-    Object.keys(x).forEach(key => delete x[key]);
-    Object.keys(y).forEach(key => delete y[key]);
-    Object.keys(fontSize).forEach(key => delete fontSize[key]);
-    Object.keys(fontColor).forEach(key => delete fontColor[key]);
-    Object.keys(fontStyle).forEach(key => delete fontStyle[key]);
+    Object.keys(x).forEach((key) => delete x[key]);
+    Object.keys(y).forEach((key) => delete y[key]);
+    Object.keys(fontSize).forEach((key) => delete fontSize[key]);
+    Object.keys(fontColor).forEach((key) => delete fontColor[key]);
+    Object.keys(fontStyle).forEach((key) => delete fontStyle[key]);
 });

@@ -12,21 +12,21 @@
 <div>
 
     {{-- {{ $files = null }} --}}
-    @if ($files != null)
+    {{-- @if ($files != null)
 
 
         @foreach ($files as $file)
             <div class="image-container">
-                <x-filament::button class="image-button" data-file-url="{{ asset('storage/' . $file) }} ">
-                    {{-- @php
+                <x-filament::button class="image-button" data-file-url="{{ asset('storage/' . $file) }} "> --}}
+    {{-- @php
                         dd(asset('storage/' . $file));
                     @endphp --}}
-                    <img src="{{ asset('storage/' . $file) }}" alt="Preset Template" class="template-image"
+    {{-- <img src="{{ asset('storage/' . $file) }}" alt="Preset Template" class="template-image"
                         loading="lazy">
                 </x-filament::button>
             </div>
         @endforeach
-    @endif
+    @endif --}}
     <div id="test">
         <div class="uploaded-image-container">
             <x-filament::button class="uploaded-image-button" style="display: none;">

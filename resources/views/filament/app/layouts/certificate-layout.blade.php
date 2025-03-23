@@ -21,17 +21,19 @@
     </div>
     <div class="stateManagement-container-canvas">
         <div class="topPanel">
-        <label for="fontSelector">Font:</label>
-        <select id="fontSelector"></select>
-        <script type="module" src="{{ asset('js/filament/fontstyle.js') }}"></script>
-        <label for="colorPicker">Color:</label>
-        <input type="color" id="colorPicker">
-        <label for="fontSizeInput">Size:</label>
-        <input type="number" id="fontSizeInput" value="24" min="1">
-       
+            <label for="fontSelector">Font:</label>
+            <select id="fontSelector"></select>
+            <script type="module" src="{{ asset('js/filament/fontstyle.js') }}"></script>
+            <label for="colorPicker">Color:</label>
+            <input type="color" id="colorPicker">
+            <label for="fontSizeInput">Size:</label>
+            <input type="number" id="fontSizeInput" value="24" min="1">
+
             <x-filament::button class="clear">
                 clear
             </x-filament::button>
+            {{-- <form action="" method="POST"> --}}
+
             <x-filament::button class="generate">
                 generate
             </x-filament::button>
@@ -49,7 +51,7 @@
 
     </div>
     <div class="Rside-gallery">
-       
+
         <div class="ai-otherfeatures"></div>
 
         <div class="sample-draggable-data">
@@ -59,5 +61,14 @@
 
     </div>
 
-    
+
 </div>
+@php
+    $user_id = Auth::id();
+@endphp
+<script>
+    const currentProjectId = {{ session('projectId') }};
+    const user_id = {{ $user_id }};
+    // console.log("Current Project ID:", currentProjectId);
+    // console.log("Current user ID:", user_id);
+</script>

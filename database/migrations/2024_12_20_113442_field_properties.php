@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('fieldProperties', function (Blueprint $table) {
-            $table->bigIncrements('id');
-
-
+            $table->bigInteger('user_id')->unsigned()->index()->nullable();
+            $table->foreign('user_id')
+                ->references('id')->on('users')->onDelete('CASCADE');
             $table->bigInteger('project_id')->unsigned()->index()->nullable();
             $table->foreign('project_id')
                 ->references('id')->on('projectname')->onDelete('CASCADE');

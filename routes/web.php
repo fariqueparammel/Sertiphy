@@ -14,6 +14,8 @@
 
     // Route::get('/certificate-designer', [presetTemplateImage::class, 'getImage']);
     Route::post('/upload', [UploadFile::class, 'store'])->name('upload');
-
+    Route::get('/phpinfo', function () {
+        phpinfo();
+    });
     // Route::get('/upload', [uploadFile::class, 'store']);
     ?>

@@ -62,6 +62,7 @@ function getCurrentImageUrl(imageUrl, callback) {
 document.querySelectorAll(".image-button").forEach((button) => {
     button.addEventListener("click", function () {
         const imageUrl = this.getAttribute("data-file-url");
+        console.log(imageUrl);
         getCurrentImageUrl(imageUrl, () => {});
     });
 });
@@ -88,16 +89,16 @@ document
 
         reader.onloadend = () => {
             // debugger;
-            base64String = reader.result
-                .replace("data:", "")
-                .replace(/^.+,/, "");
+            base64String = reader.result;
+            // .replace("data:", "")
+            // .replace(/^.+,/, "");
             let key = `image${i}`; // Dynamic key for sessionStorage
 
             sessionStorage.setItem(key, base64String); // Store in sessionStorage
-            console.log(`Stored ${key}:`, base64String);
+            // console.log(`Stored ${key}:`, base64String);
 
             i++;
-            console.log(base64String);
+            // console.log(base64String);
             // Logs data:<type>;base64,wL2dvYWwgbW9yZ...
         };
         reader.readAsDataURL(file);

@@ -56,6 +56,7 @@ class uploadFile extends Controller
     public function import()
     {
         $recordId =  Session::get('projectId');
+        // dump($recordId);
         // Session::forget('projectId');
         Excel::import(new ExcelDataImport($recordId), request()->file('file'));
     }

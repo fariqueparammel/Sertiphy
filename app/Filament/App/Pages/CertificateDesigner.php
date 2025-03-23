@@ -5,6 +5,7 @@ namespace App\Filament\App\Pages;
 use App\Services\getJsonDataService;
 use App\Http\Controllers\presetTemplateImage;
 use Filament\Pages\Page;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use PhpOffice\PhpSpreadsheet\Calculation\Logical\Boolean;
 
@@ -39,7 +40,8 @@ class CertificateDesigner extends Page
         // dd($imagePath);
         //  Storage::disk('public')->files('templatesImages');
         // dd($imagePath);
-
+        // $projectIdd = Session::get('projectId');
+        // dump($projectIdd);
         foreach ($imagePath as $imageFullpath) {
             $file_path = Storage::url($imageFullpath);
             // $url = asset($file_path);

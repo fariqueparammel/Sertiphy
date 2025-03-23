@@ -15,5 +15,6 @@
         "konva": "^9.3.18",
         "select2": "4.1.0-rc.0",
         "tabulator-tables": "^6.3.1"
-    }
+    },
+    "proxy": "http://localhost:8000"
 }
