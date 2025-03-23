@@ -19,4 +19,23 @@ run npm run dev   // to start vite
 
 thinking about rest will be updated....
 
+For the preset template to get loaded into your application 
+https://stackoverflow.com/questions/41772340/how-do-i-add-a-certificate-authority-to-php-so-the-file-function-trusts-certif
+refer this , this is the error that i have encountered while developing , after that 
+**update the php.ini setting with this ***
+[curl]
+; A default value for the CURLOPT_CAINFO option. This is required to be an
+; absolute path.
+curl.cainfo ="D:\path_to_file\cacert.pem"
 
+[openssl]
+; The location of a Certificate Authority (CA) file on the local filesystem
+; to use when verifying the identity of SSL/TLS peers. Most users should
+; not specify a value for this directive as PHP will attempt to use the
+; OS-managed cert stores in its absence. If specified, this value may still
+; be overridden on a per-stream basis via the "cafile" SSL stream context
+; option.
+openssl.cafile="D:\path_to_file\cacert.pem"
+
+on composer install might get error with xdebug and mongodb and to ignore that the command will be shown there itself in terminal
+for debugging php you could setup XDEBUG its really helpfull
