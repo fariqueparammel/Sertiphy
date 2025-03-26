@@ -1,5 +1,5 @@
 import Konva from "konva";
-
+let currentPresetTemplateUrl = null;
 let sceneWidth = 900;
 let sceneHeight = 900;
 let i = 0;
@@ -57,12 +57,19 @@ function getCurrentImageUrl(imageUrl, callback) {
         callback(true);
     };
     imageObj.src = imageUrl;
+    // let currentPresetTemplateUrl = imageUrl;
+    // console.log(imageUrl);
+    debugger;
+    if (!imageUrl.startsWith("blob:")) {
+        localStorage.setItem("selectedImageUrl", imageUrl);
+    } // console.log("da" + localStorage.getItem("selectedImageUrl"));
+    // console.log(currentPresetTemplateUrl);
 }
 
 document.querySelectorAll(".image-button").forEach((button) => {
     button.addEventListener("click", function () {
         const imageUrl = this.getAttribute("data-file-url");
-        console.log(imageUrl);
+        // console.log(imageUrl);
         getCurrentImageUrl(imageUrl, () => {});
     });
 });

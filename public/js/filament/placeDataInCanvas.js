@@ -2,6 +2,7 @@ import Konva from "konva";
 import konvaObject from "./konvaScript.js";
 // import { track_position } from "./btnfunctions.js";
 let imageFiles = [];
+let selectedImageUrl = null;
 // let nameCount = 0;
 let selectedText = null;
 const fontSizeInput = document.getElementById("fontSizeInput");
@@ -299,40 +300,46 @@ document.querySelector(".generate").addEventListener("click", function () {
     // console.log(dataArray);
     const jsonObject = JSON.stringify(dataArray);
     console.log(jsonObject);
-    let storage = {};
-    Object.keys(sessionStorage).forEach((key) => {
-        storage[key] = sessionStorage.getItem(key);
-    });
+    selectedImageUrl = localStorage.getItem("selectedImageUrl");
+    console.log(selectedImageUrl);
+    debugger;
+    if (!selectedImageUrl) {
+        console.log("image url s null");
+        let storage = {};
+        Object.keys(sessionStorage).forEach((key) => {
+            storage[key] = sessionStorage.getItem(key);
+        });
 
-    function dataUriToFile(dataUri, fileName) {
-        const parts = dataUri.split(";base64,");
-        const contentType = parts[0].split(":")[1]; // e.g., 'image/png'
-        const raw = window.atob(parts[1]); // Decode Base64
-        const rawLength = raw.length;
-        const uInt8Array = new Uint8Array(rawLength);
+        function dataUriToFile(dataUri, fileName) {
+            const parts = dataUri.split(";base64,");
+            const contentType = parts[0].split(":")[1]; // e.g., 'image/png'
+            const raw = window.atob(parts[1]); // Decode Base64
+            const rawLength = raw.length;
+            const uInt8Array = new Uint8Array(rawLength);
 
-        for (let i = 0; i < rawLength; ++i) {
-            uInt8Array[i] = raw.charCodeAt(i);
+            for (let i = 0; i < rawLength; ++i) {
+                uInt8Array[i] = raw.charCodeAt(i);
+            }
+
+            // Create a Blob from the binary data
+            const blob = new Blob([uInt8Array], { type: contentType });
+            // const fileName = `Image${nameCount}`;
+            // nameCount++;
+            // Wrap the Blob in a File object
+            return new File([blob], fileName, { type: contentType });
         }
 
-        // Create a Blob from the binary data
-        const blob = new Blob([uInt8Array], { type: contentType });
-        // const fileName = `Image${nameCount}`;
-        // nameCount++;
-        // Wrap the Blob in a File object
-        return new File([blob], fileName, { type: contentType });
-    }
-
-    Object.values(storage).forEach((dataUri, index) => {
-        const fileName = `image_${index}.${
-            dataUri.split(";")[0].split("/")[1]
-        }`;
-        const file = dataUriToFile(dataUri, fileName);
-        imageFiles.push(file);
-        // console.log(imageFiles);
-    });
-    // console.log(storage);
+        Object.values(storage).forEach((dataUri, index) => {
+            const fileName = `image_${index}.${
+                dataUri.split(";")[0].split("/")[1]
+            }`;
+            const file = dataUriToFile(dataUri, fileName);
+            imageFiles.push(file);
+            // console.log(imageFiles);
+        });
+    } // console.log(storage);
     sessionStorage.clear();
+    localStorage.clear();
 
     // console.log(sessionStorage.getItem("image0"));
 
@@ -340,15 +347,21 @@ document.querySelector(".generate").addEventListener("click", function () {
         const formData = new FormData();
 
         // Append each file to FormData
-        imageFiles.forEach((file, index) => {
-            formData.append("images[]", file);
-            // Use 'images[]' to send as an array
-        });
+        if (!selectedImageUrl) {
+            imageFiles.forEach((file, index) => {
+                formData.append("images[]", file);
+                console.log("imageurl is null");
+                // Use 'images[]' to send as an array
+            });
+        } else {
+            formData.append("selectedImageUrl", selectedImageUrl);
+        }
         // const userProjectId= JSON.stringify{user_id:"$user_id",projectId:"$currentProjectId" };
         formData.append("jsonObject", jsonObject);
         formData.append("project_id", currentProjectId);
         formData.append("user_id", user_id);
         console.log([...formData.entries()]);
+        debugger;
         try {
             // Send FormData to the server using fetch
             // debugger;
@@ -388,10 +401,11 @@ document.querySelector(".generate").addEventListener("click", function () {
 });
 // const currentProjectIdd =
 // debugger;
-console.log("Current Project ID:", currentProjectId);
-console.log("Current user ID:", user_id);
+// console.log("Current Project ID:", currentProjectId);
+// console.log("Current user ID:", user_id);
 document.querySelector(".clear").addEventListener("click", function () {
     // sessionStorage.clear();
+    localStorage.clear();
     konvaObject.layer.destroyChildren(); // Remove all objects from the layer
     konvaObject.layer.batchDraw(); // Redraw the canvas to reflect changes
 

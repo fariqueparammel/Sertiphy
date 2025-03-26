@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Validation\ValidationException;
 
 
 class uploadImageAndDataApiController extends Controller
@@ -42,20 +43,34 @@ class uploadImageAndDataApiController extends Controller
     public function uploadImages(Request $request)
     {
         // Validate the request
-        $request->validate([
-            'images' => 'required|array',
-            'images.*' => 'image|mimes:jpeg,png,jpg|max:10000',
-            'jsonObject' =>  'required|string',
-            'project_id' =>  'required|string',
-            'user_id' =>  'required|string',
+        try {
+            // Perform validation
+            $validatedData = $request->validate([
+                'images' => 'nullable|array|required_without:selectedImageUrl',
+                'images.*' => 'image|mimes:jpeg,png,jpg|max:10000',
+                'jsonObject' => 'required|string',
+                'project_id' => 'required|string',
+                'user_id' => 'required|string',
+                'selectedImageUrl' => 'nullable|string|required_without:images',
+            ]);
 
-            // Max 2MB per image
-        ]);
+            // If validation passes, continue with your logic
+
+        } catch (ValidationException $e) {
+            // Return JSON response with validation errors
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Validation failed.',
+                'errors' => $e->errors(),
+            ], 422); // 422 Unprocessable Entity
+        }
+
         //$projectId = 54;
         $user_id = $request->input('user_id');
         $projectId = $request->input('project_id');
+        $selectedImageUrl = $request->input('selectedImageUrl');
         dump($user_id);
-
+        dump($selectedImageUrl);
         dump($projectId);
 
 
@@ -78,30 +93,47 @@ class uploadImageAndDataApiController extends Controller
             ], 400);
         }
         $uploadedImages = [];
+        if ($request->file('images') != null) {        // Loop through the uploaded files
+            foreach ($request->file('images') as $image) {
 
-        // Loop through the uploaded files
-        foreach ($request->file('images') as $image) {
+                $storagePath = "user-uploads/user_id_{$user_id}/project_id_{$projectId}";
 
-            $storagePath = "user-uploads/user_id_{$user_id}/project_id_{$projectId}";
+                // Store the image in DigitalOcean Spaces
+                try {
+                    // $image = $request->file('images');
+                    $path = Storage::disk('digitalOceanSpaces')->put($storagePath, $image, 'public');
+                    $url = Storage::url($path);
 
-            // Store the image in DigitalOcean Spaces
-            try {
-                // $image = $request->file('images');
-                $path = Storage::disk('digitalOceanSpaces')->put($storagePath, $image, 'public');
-                $url = Storage::url($path);
-
-                // Add the URL to the array
-                $uploadedImages[] = $url;
-            } catch (\Exception $e) {
-                return response()->json([
-                    'message' => 'Failed to upload one or more images.',
-                    'error' => $e->getMessage(),
-                ], 500);
+                    // Add the URL to the array
+                    $uploadedImages[] = $url;
+                } catch (\Exception $e) {
+                    return response()->json([
+                        'message' => 'Failed to upload one or more images.',
+                        'error' => $e->getMessage(),
+                    ], 500);
+                }
             }
         }
+
         // 'user_id', 'project_id', 'field_properties', 'fieldDescription'
+        if ($selectedImageUrl != null && !str_starts_with($selectedImageUrl, 'blob:')) {
+            dump($selectedImageUrl);
+            $imageUrl = ["url" => $selectedImageUrl];
+            $url = json_encode($imageUrl);
+            $image = "image0";
+            FieldProperties::insert([
+                'user_id' => $user_id,
+                'project_id' => $projectId,
+                'fieldDescription' => $image,
+                'field_properties' => $url,
+
+
+            ]);
+        }
+
+
         if ($uploadedImages != null) {
-            $i = 0;
+            $i = 1;
             foreach ($uploadedImages as $item) {
                 $imageUrl = ["url" => $item];
                 $url = json_encode($imageUrl);
@@ -117,27 +149,40 @@ class uploadImageAndDataApiController extends Controller
                 ]);
                 $i++;
             }
-            foreach ($jsonObject as $item) {
-                $propertyName = $item["key"];
-                unset($item['key']);
-                $properties = json_encode($item);
-                FieldProperties::insert([
-                    'user_id' => $user_id,
-                    'project_id' => $projectId,
-                    'fieldDescription' => $propertyName,
-                    'field_properties' => $properties,
+            // foreach ($jsonObject as $item) {
+            //     $propertyName = $item["key"];
+            //     unset($item['key']);
+            //     $properties = json_encode($item);
+            //     FieldProperties::insert([
+            //         'user_id' => $user_id,
+            //         'project_id' => $projectId,
+            //         'fieldDescription' => $propertyName,
+            //         'field_properties' => $properties,
 
 
-                ]);
-            }
+            //     ]);
+            // }
         }
-        Notification::make()
-            ->title('Upload Successful')
-            ->body('All images have been uploaded successfully.')
-            ->success()
-            ->send();
+        foreach ($jsonObject as $item) {
+            $propertyName = $item["key"];
+            unset($item['key']);
+            $properties = json_encode($item);
+            FieldProperties::insert([
+                'user_id' => $user_id,
+                'project_id' => $projectId,
+                'fieldDescription' => $propertyName,
+                'field_properties' => $properties,
 
-        // Return a success response
+
+            ]);
+        }
+        // Notification::make()
+        //     ->title('Upload Successful')
+        //     ->body('All images have been uploaded successfully.')
+        //     ->success()
+        //     ->send();
+
+
 
         return response()->json([
             'message' => 'Images uploaded successfully',
@@ -147,49 +192,3 @@ class uploadImageAndDataApiController extends Controller
         ]);
     }
 }
-    //         // Return a JSON response
-    //         return response()->json([
-    //             'message' => 'Images uploaded successfully.',
-    //             'images' => $uploadedImages,
-    //         ]);
-    //     }
-
-    //     public function index()
-    //     {
-    //         //
-    //     }
-
-    //     /**
-    //      * Store a newly created resource in storage.
-    //      */
-    //     public function store(Request $request)
-    //     {
-    //         //
-    //     }
-
-    //     /**
-    //      * Display the specified resource.
-    //      */
-    //     public function show(FieldProperties $fieldProperties)
-    //     {
-    //         //
-    //     }
-
-    //     /**
-    //      * Update the specified resource in storage.
-    //      */
-    //     public function update(Request $request, FieldProperties $fieldProperties)
-    //     {
-    //         //
-    //     }
-
-    //     /**
-    //      * Remove the specified resource from storage.
-    //      */
-    //     public function destroy(FieldProperties $fieldProperties)
-    //     {
-    //         //
-    //     }
-    //     public function test()
-    //     {
-    //         return "testing api";
