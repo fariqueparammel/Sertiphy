@@ -69,9 +69,9 @@ class uploadImageAndDataApiController extends Controller
         $user_id = $request->input('user_id');
         $projectId = $request->input('project_id');
         $selectedImageUrl = $request->input('selectedImageUrl');
-        dump($user_id);
-        dump($selectedImageUrl);
-        dump($projectId);
+        // dump($user_id);
+        // dump($selectedImageUrl);
+        // dump($projectId);
 
 
 
@@ -79,13 +79,13 @@ class uploadImageAndDataApiController extends Controller
 
 
         if (!$user_id || !$projectId) {
-            dump("project/userid nill");
+            // dump("project/userid nill");
             return response()->json([
                 'message' => 'Authentication or project ID is missing.',
             ], 400);
         }
         $jsonObject = json_decode($request->input('jsonObject'), true);
-        dump($jsonObject);
+        // dump($jsonObject);
 
         if (json_last_error() !== JSON_ERROR_NONE) {
             return response()->json([
@@ -117,7 +117,7 @@ class uploadImageAndDataApiController extends Controller
 
         // 'user_id', 'project_id', 'field_properties', 'fieldDescription'
         if ($selectedImageUrl != null && !str_starts_with($selectedImageUrl, 'blob:')) {
-            dump($selectedImageUrl);
+            // dump($selectedImageUrl);
             $imageUrl = ["url" => $selectedImageUrl];
             $url = json_encode($imageUrl);
             $image = "image0";
@@ -138,7 +138,7 @@ class uploadImageAndDataApiController extends Controller
                 $imageUrl = ["url" => $item];
                 $url = json_encode($imageUrl);
                 $image = "image" . $i;
-                dump($image);
+                // dump($image);
                 FieldProperties::insert([
                     'user_id' => $user_id,
                     'project_id' => $projectId,
@@ -183,7 +183,8 @@ class uploadImageAndDataApiController extends Controller
         //     ->send();
 
 
-
+        // return response("success", 200)
+        //     ->header('Content-Type', 'text/plain');
         return response()->json([
             'message' => 'Images uploaded successfully',
             'images' => $uploadedImages,

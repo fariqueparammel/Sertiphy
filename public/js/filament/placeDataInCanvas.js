@@ -304,7 +304,7 @@ document.querySelector(".generate").addEventListener("click", function () {
     console.log(selectedImageUrl);
     // debugger;
     if (!selectedImageUrl) {
-        console.log("image url s null");
+        // console.log("image url s null");
         let storage = {};
         Object.keys(sessionStorage).forEach((key) => {
             storage[key] = sessionStorage.getItem(key);
@@ -350,7 +350,7 @@ document.querySelector(".generate").addEventListener("click", function () {
         if (!selectedImageUrl) {
             imageFiles.forEach((file, index) => {
                 formData.append("images[]", file);
-                console.log("imageurl is null");
+                // console.log("imageurl is null");
                 // Use 'images[]' to send as an array
             });
         } else {
@@ -372,7 +372,7 @@ document.querySelector(".generate").addEventListener("click", function () {
                     //     .querySelector('meta[name="csrf-token"]')
                     //     ?.getAttribute("content"), // Use optional chaining to prevent errors if null
                     // "content-type": "multipart/form-data",
-                    Accept: "application/json",
+                    Accept: "Application/json",
                 },
                 body: formData,
 
@@ -381,16 +381,32 @@ document.querySelector(".generate").addEventListener("click", function () {
 
             // const result = await response.json();
 
-            // debugger;
+            debugger;
 
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
+            // json.stringify(result)
+            const status = await response.status;
+            // console.log("status" + status);
+            if (status == 200) {
+                const response = await fetch("/generation", {
+                    method: "GET",
+                    headers: {
+                        // "X-CSRF-TOKEN": document
+                        //     .querySelector('meta[name="csrf-token"]')
+                        //     ?.getAttribute("content"), // Use optional chaining to prevent errors if null
+                        // "content-type": "multipart/form-data",
+                        // Accept: "Application/json",
+                    },
+                    // body: status,
 
-            const result = response;
+                    // No need to manually set Content-Type with FormData
+                });
+            }
+            const result = await response.json();
+            console.log("Server Response:" + JSON.stringify(result));
             // console.log("Upload response:", result);
-
-            console.log("Server Response:" + result);
         } catch (error) {
             console.error("Error uploading images:", error);
         }

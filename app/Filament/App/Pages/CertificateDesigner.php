@@ -40,6 +40,7 @@ class CertificateDesigner extends Page
         // return redirect()->to(ProjectsResource::getDownloadUrl($projectId));
         return redirect()->to(ProjectsResource::getUrl('download'));
     }
+
     public static function getImage()
     {
 

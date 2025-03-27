@@ -1,6 +1,7 @@
   <?php
 
     use App\Http\Controllers\presetTemplateImage;
+    use App\Http\Controllers\routeToDownloadPage;
     use App\Http\Controllers\uploadFile;
     use Illuminate\Support\Facades\Route;
 
@@ -17,6 +18,7 @@
     Route::get('/phpinfo', function () {
         phpinfo();
     });
+    Route::get('/generation', [routeToDownloadPage::class, 'handleRouting']);
     //    Route::get('/download')->View('filament.app.resources.projects-resource.pages.download-certificates');
 
     // Route::get('/project/download/{id}', [ProjectController::class, 'download'])
