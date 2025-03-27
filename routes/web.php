@@ -17,5 +17,9 @@
     Route::get('/phpinfo', function () {
         phpinfo();
     });
+    //    Route::get('/download')->View('filament.app.resources.projects-resource.pages.download-certificates');
+
+    // Route::get('/project/download/{id}', [ProjectController::class, 'download'])
+    // ->name('project.download');
     // Route::get('/upload', [uploadFile::class, 'store']);
     ?>

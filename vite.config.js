@@ -2,8 +2,11 @@ import { defineConfig } from "vite";
 import laravel from "laravel-vite-plugin";
 
 export default defineConfig({
+    server: {
+        hmr: false, // Disable Hot Module Replacement
+    },
     build: {
-        sourcemap: true,
+        sourcemap: false,
     },
     plugins: [
         laravel({
@@ -19,4 +22,14 @@ export default defineConfig({
             refresh: true,
         }),
     ],
+    // server: {
+    //     port: 5173,
+    //     proxy: {
+    //         "/api": {
+    //             target: "http://127.0.0.1:8000",
+    //             changeOrigin: true,
+    //             rewrite: (path) => path.replace(/^\/api/, "/api"),
+    //         },
+    //     },
+    // },
 });

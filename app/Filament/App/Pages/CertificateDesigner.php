@@ -2,12 +2,14 @@
 
 namespace App\Filament\App\Pages;
 
+use App\Filament\App\Resources\ProjectsResource;
 use App\Services\getJsonDataService;
 use App\Http\Controllers\presetTemplateImage;
 use Filament\Pages\Page;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use PhpOffice\PhpSpreadsheet\Calculation\Logical\Boolean;
+
 
 class CertificateDesigner extends Page
 {
@@ -16,7 +18,7 @@ class CertificateDesigner extends Page
         return false;
     }
     // protected static ?string $navigationIcon = 'heroicon-o-document-text';
-
+    // protected static string $resource = ProjectsResource::class;
     protected static string $view = 'filament.app.pages.certificate-designer';
     protected ?string $heading = '';
     public $files = [];
@@ -32,7 +34,12 @@ class CertificateDesigner extends Page
         // Call the controller method
         $this->files = $this->getImage();
     }
-
+    public function download()
+    {
+        // $projectId = Session::get('projectId'); // Example: Get the project ID
+        // return redirect()->to(ProjectsResource::getDownloadUrl($projectId));
+        return redirect()->to(ProjectsResource::getUrl('download'));
+    }
     public static function getImage()
     {
 

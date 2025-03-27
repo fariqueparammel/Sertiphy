@@ -131,8 +131,13 @@ class ProjectsResource extends Resource
             // 'test' => Pages\OpenProject::route('/choose'),
             'edit' => Pages\EditProjects::route('/{record}/edit'),
             'data-entry' => Pages\ManualDataEntry::route('/data-entry'),
+            'download' => Pages\downloadCertificates::route('/download'),
             // 'view' => Pages\OpenProject::route('/choose'),
             //
         ];
     }
+    // public static function getDownloadUrl($projectId): string
+    // {
+    //     return '/project/download/' . $projectId;
+    // }
 }

@@ -33,8 +33,8 @@
                 clear
             </x-filament::button>
             {{-- <form action="" method="POST"> --}}
-
-            <x-filament::button class="generate">
+            {{-- wire:click="download" --}}
+            <x-filament::button wire:click="download" class="generate">
                 generate
             </x-filament::button>
 

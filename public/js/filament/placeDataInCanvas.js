@@ -302,7 +302,7 @@ document.querySelector(".generate").addEventListener("click", function () {
     console.log(jsonObject);
     selectedImageUrl = localStorage.getItem("selectedImageUrl");
     console.log(selectedImageUrl);
-    debugger;
+    // debugger;
     if (!selectedImageUrl) {
         console.log("image url s null");
         let storage = {};
@@ -381,7 +381,7 @@ document.querySelector(".generate").addEventListener("click", function () {
 
             // const result = await response.json();
 
-            debugger;
+            // debugger;
 
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);

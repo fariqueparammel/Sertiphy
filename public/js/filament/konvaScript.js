@@ -59,7 +59,7 @@ function getCurrentImageUrl(imageUrl, callback) {
     imageObj.src = imageUrl;
     // let currentPresetTemplateUrl = imageUrl;
     // console.log(imageUrl);
-    debugger;
+    // debugger;
     if (!imageUrl.startsWith("blob:")) {
         localStorage.setItem("selectedImageUrl", imageUrl);
     } // console.log("da" + localStorage.getItem("selectedImageUrl"));
