@@ -390,20 +390,48 @@ document.querySelector(".generate").addEventListener("click", function () {
             const status = await response.status;
             // console.log("status" + status);
             if (status == 200) {
-                const response = await fetch("/generation", {
-                    method: "GET",
-                    headers: {
-                        // "X-CSRF-TOKEN": document
-                        //     .querySelector('meta[name="csrf-token"]')
-                        //     ?.getAttribute("content"), // Use optional chaining to prevent errors if null
-                        // "content-type": "multipart/form-data",
-                        // Accept: "Application/json",
-                    },
-                    // body: status,
+                new FilamentNotification()
+                    .title("Saved successfully")
+                    .success()
+                    .seconds(3) // Duration in seconds
+                    .send();
+                // const response = await fetch("/generation", {
+                //     method: "GET",
+                //     headers: {
+                //         // "X-CSRF-TOKEN": document
+                //         //     .querySelector('meta[name="csrf-token"]')
+                //         //     ?.getAttribute("content"), // Use optional chaining to prevent errors if null
+                //         // "content-type": "multipart/form-data",
+                //         // Accept: "Application/json",
+                //     },
+                //     // body: status,
+                //     // No need to manually set Content-Type with FormData
+                // });
+                setTimeout(function () {
+                    document.getElementById("routeToDownload").click();
+                }, 3000);
 
-                    // No need to manually set Content-Type with FormData
-                });
+                // .redirect("filament.app.resources.projects.download");
+            } else {
+                new FilamentNotification()
+                    .title("failed to save successfully")
+                    .danger()
+                    .seconds(5) // Duration in seconds
+                    .send();
             }
+            // const response = await fetch("/generation", {
+            //     method: "GET",
+            //     headers: {
+            //         // "X-CSRF-TOKEN": document
+            //         //     .querySelector('meta[name="csrf-token"]')
+            //         //     ?.getAttribute("content"), // Use optional chaining to prevent errors if null
+            //         // "content-type": "multipart/form-data",
+            //         // Accept: "Application/json",
+            //     },
+            //     // body: status,
+            //     // No need to manually set Content-Type with FormData
+            // });
+
             const result = await response.json();
             console.log("Server Response:" + JSON.stringify(result));
             // console.log("Upload response:", result);

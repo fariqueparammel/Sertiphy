@@ -38,6 +38,7 @@ class CertificateDesigner extends Page
     {
         // $projectId = Session::get('projectId'); // Example: Get the project ID
         // return redirect()->to(ProjectsResource::getDownloadUrl($projectId));
+
         return redirect()->to(ProjectsResource::getUrl('download'));
     }
 

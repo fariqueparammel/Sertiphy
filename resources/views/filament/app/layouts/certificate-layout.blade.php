@@ -34,9 +34,11 @@
             </x-filament::button>
             {{-- <form action="" method="POST"> --}}
             {{-- wire:click="download" --}}
-            <x-filament::button wire:click="download" class="generate">
+            <x-filament::button class="generate">
                 generate
             </x-filament::button>
+            <button wire:click="download" display='none' id="routeToDownload">
+            </button>
 
 
             <!-- Text Preview -->

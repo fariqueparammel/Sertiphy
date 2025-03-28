@@ -74,6 +74,6 @@ class OpenProject extends Page  implements HasForms, HasActions
     public function getRedirectUrl(): string
     {
 
-        return $$this->getResource()::getUrl('data-entry');
+        return $this->getResource()::getUrl('data-entry');
     }
 }
