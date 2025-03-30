@@ -395,21 +395,31 @@ document.querySelector(".generate").addEventListener("click", function () {
                     .success()
                     .seconds(3) // Duration in seconds
                     .send();
-                // const response = await fetch("/generation", {
-                //     method: "GET",
-                //     headers: {
-                //         // "X-CSRF-TOKEN": document
-                //         //     .querySelector('meta[name="csrf-token"]')
-                //         //     ?.getAttribute("content"), // Use optional chaining to prevent errors if null
-                //         // "content-type": "multipart/form-data",
-                //         // Accept: "Application/json",
-                //     },
-                //     // body: status,
-                //     // No need to manually set Content-Type with FormData
-                // });
+                const apiStatus = new FormData();
+                apiStatus.append("status", status);
+                apiStatus.append("project_id", currentProjectId);
                 setTimeout(function () {
                     document.getElementById("routeToDownload").click();
                 }, 3000);
+                const pythonRes = await fetch("/api/generation", {
+                    method: "POST",
+                    headers: {
+                        // "X-CSRF-TOKEN": document
+                        //     .querySelector('meta[name="csrf-token"]')
+                        //     ?.getAttribute("content"), // Use optional chaining to prevent errors if null
+                        // "content-type": "multipart/form-data",
+                        Accept: "Application/json",
+                    },
+                    body: apiStatus,
+                    // No need to manually set Content-Type with FormData
+                });
+                if (!pythonRes.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                debugger;
+                const pythonResult = await pythonRes.json();
+                sessionStorage.setItem("downloadUri", pythonResult);
+                console.log("result" + JSON.stringify(pythonResult));
 
                 // .redirect("filament.app.resources.projects.download");
             } else {
@@ -419,18 +429,6 @@ document.querySelector(".generate").addEventListener("click", function () {
                     .seconds(5) // Duration in seconds
                     .send();
             }
-            // const response = await fetch("/generation", {
-            //     method: "GET",
-            //     headers: {
-            //         // "X-CSRF-TOKEN": document
-            //         //     .querySelector('meta[name="csrf-token"]')
-            //         //     ?.getAttribute("content"), // Use optional chaining to prevent errors if null
-            //         // "content-type": "multipart/form-data",
-            //         // Accept: "Application/json",
-            //     },
-            //     // body: status,
-            //     // No need to manually set Content-Type with FormData
-            // });
 
             const result = await response.json();
             console.log("Server Response:" + JSON.stringify(result));
@@ -450,6 +448,7 @@ document.querySelector(".generate").addEventListener("click", function () {
 document.querySelector(".clear").addEventListener("click", function () {
     // sessionStorage.clear();
     localStorage.clear();
+    sessionStorage.clear();
     konvaObject.layer.destroyChildren(); // Remove all objects from the layer
     konvaObject.layer.batchDraw(); // Redraw the canvas to reflect changes
 
