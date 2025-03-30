@@ -3,12 +3,10 @@ import json
 import os
 import requests
 import zipfile
-import boto3
-import os
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware  # Import CORSMiddleware
 from fastapi.responses import FileResponse
 from PIL import Image, ImageDraw, ImageFont
-from botocore.exceptions import NoCredentialsError
 
 # -------------------------------
 # Database configuration
@@ -31,11 +29,26 @@ def get_unique_cert_name(folder_path, extension="png"):
             return cert_path
         counter += 1
 
-
 # -------------------------------
 # FastAPI initialization
 # -------------------------------
 app = FastAPI()
+
+# -------------------------------
+# CORS Middleware Configuration
+# -------------------------------
+origins = [
+    "http://127.0.0.1:8000",  # Allow your Laravel app's origin
+    "http://localhost:8000",  # Optional: If you're testing on localhost
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,  # List of allowed origins
+    allow_credentials=True,  # Allow cookies and credentials
+    allow_methods=["GET", "POST", "PUT", "DELETE"],  # Allowed HTTP methods
+    allow_headers=["*"],  # Allow all headers
+)
 
 # Base folder for generated files
 BASE_FOLDER = "project"
@@ -157,15 +170,10 @@ async def generate_certificates(project_id: int):
                 # Generate a unique cert name like cert_1.png, cert_2.png, etc.
                 cert_path = get_unique_cert_name(BASE_FOLDER)
 
-# Save the certificate
+                # Save the certificate
                 cert_image.save(cert_path)
                 certificates_list.append(cert_path)
                 print(f"🎉 Certificate generated: {cert_path}")
-                # cert_name = f"{fielddata_dict.get('first_name', 'certificate')}_cert.png"
-                # cert_path = os.path.join(BASE_FOLDER, cert_name)
-                # cert_image.save(cert_path)
-                # certificates_list.append(cert_path)
-                # print(f"🎉 Certificate generated: {cert_path}")
 
             except json.JSONDecodeError as e:
                 raise HTTPException(status_code=500, detail=f"Error decoding JSON in exceluploaddata: {e}")
@@ -183,7 +191,7 @@ async def generate_certificates(project_id: int):
         # -------------------------------
         # Return Download Link
         # -------------------------------
-        return {"download_link": f"/download/{project_id}"}
+        return {f"/download/{project_id}"}
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error: {str(e)}")
@@ -192,7 +200,6 @@ async def generate_certificates(project_id: int):
         # Close database connection
         cursor.close()
         conn.close()
-
 
 # -------------------------------
 # Endpoint to Download Zip File
