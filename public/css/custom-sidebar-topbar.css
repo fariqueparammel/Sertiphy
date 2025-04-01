@@ -1,252 +1,37 @@
-/* .fi-sidebar{
-    position: fixed;
-  z-index: 1000;
+/* resources/css/custom-sidebar-topbar.css */
 
-  opacity: 1;
-}
-.fi-sidebar-nav{
-    background-color: rgb(7, 5, 5);
-} */
+/* ❗️ STEP 1: Get EXACT header height in pixels (e.g., 68px) using Dev Tools */
+/* ❗️ STEP 2: Replace '68px' in the 'height' rule below with your exact value */
 
-.fi-main {
-    margin-left: 0;
-    margin-right: 0;
-}
-
-.main-layout {
-    height: calc(100vh - 4rem);
-    overflow: auto;
-    /* background-color: antiquewhite; */
-    display: flex;
-}
-
-main {
-    /* max-height: none !important; */
+main.fi-main {
     max-width: none !important;
-    /* Overrides the max-w-7xl restriction */
-    width: 100%;
     padding-left: 0 !important;
-    /* overrides both padding*/
     padding-right: 0 !important;
+
+    /* --- Force height and overflow control --- */
+    /* Make main area fill viewport below header */
+    height: calc(100vh - 68px) !important; /* <<< UPDATE THIS VALUE! */
+    min-height: auto !important; /* Override any min-height */
+    overflow: hidden !important;  /* Prevent this container itself from scrolling */
+    display: flex !important;     /* Ensure it can contain your flex row */
+    flex-direction: column !important; /* Ensure it stacks correctly if needed */
+    /* --- End additions --- */
 }
 
-.Lside-gallery {
-    /* position: relative; */
-    /* transition: margin-left 5s; */
-    display: flex;
-    flex-direction: column;
-    /* Stack children vertically */
-    height: calc(100vh - 4rem);
-    /* Full height of the viewport */
-    /* overflow: hidden; */
-
-    left: 0px;
-    overflow: auto;
-    width: 15%;
-    height: calc(100vh - 4rem);
-    border: solid 1px;
-    border-color: rgb(135, 135, 135);
-    /* border: 3px solid #73AD21; */
+/* --- Optional Last Resort: If the above STILL fails --- */
+/* Try hiding overflow on the body FOR panel pages. */
+/* This might affect modals or other elements, use with caution. */
+/*
+body.fi-panel-page {
+    overflow: hidden !important;
 }
-
-#preset-template {
-    overflow: auto;
-    height: 50%;
-    width: 100%;
-    resize: vertical;
-
-    /* background-color:  rgb(96, 96, 96); */
-    border: solid 1px;
-    border-color: rgb(135, 135, 135);
+*/
+/* If Filament doesn't add 'fi-panel-page' to body, you might need a more generic body selector, which is riskier */
+/*
+body {
+    overflow: hidden !important;
 }
+*/
 
-#upload-template {
-    flex-grow: 1;
-    /* Use remaining space */
-    /* background-color: goldenrod; */
-    overflow: auto;
-    /* padding: 3%; */
-    /* resize: vertical;
-    height: 50%;
-    width: 100%;
-   float: bottom;*/
-    /* background-color: rgb(96, 96, 96); */
-    border: solid 1px;
-    border-color: rgb(135, 135, 135);
-
-
-}
-
-/* #container {
-    display: flex;
-    flex-direction: column;
-    height: calc(100vh - 4rem);
-    overflow: hidden;
-} */
-
-.image-container {
-    margin: 7px;
-    display: flex;
-    border-radius: 12%;
-    /* background-color: rgb(56, 54, 54); */
-}
-
-.uploaded-image-container {
-    margin: 7px;
-    display: flex;
-    border-radius: 12%;
-    /* background-color: rgb(96, 96, 96); */
-}
-
-.template-image {
-    border-radius: 12%;
-
-}
-
-.image-button {
-    padding: 2%;
-    border-radius: 12%;
-}
-
-.uploaded-image-button {
-    padding: 2%;
-    border-radius: 12%;
-}
-
-.uploaded-template-image {
-    border-radius: 12%;
-
-}
-
-.Rside-gallery {
-    float: right;
-
-    display: flex;
-    flex-direction: column;
-    border: solid 1px;
-    border-color: rgb(135, 135, 135);
-    /* Stack children vertically */
-    /* height: calc(100vh - 4rem); */
-    /* Full height of the viewport */
-    /* overflow: hidden; */
-
-
-    overflow: auto;
-    width: 15%;
-}
-
-
-
-.stateManagement-container-canvas {
-    width: 70%;
-    display: flex;
-    flex-direction: column;
-}
-
-.ai-otherfeatures {
-    flex-grow: 1;
-    /* Use remaining space */
-    /* background-color: green; */
-    overflow: auto;
-    border: solid 1px;
-    border-color: rgb(135, 135, 135);
-
-}
-
-.sample-draggable-data {
-    overflow: auto;
-    height: 50%;
-    width: 100%;
-    resize: vertical;
-    border: solid 1px;
-    border-color: rgb(135, 135, 135);
-}
-
-.topPanel {
-    /* background-color: red; */
-    /* min-height: 5%; */
-    height: 5%;
-    width: 100%;
-    border: solid 1px;
-    border-color: rgb(135, 135, 135);
-
-}
-
-#konvaCanvas {
-    /* background-color: chartreuse; */
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
-}
-
-#addTemplateButton {
-
-    margin-top: 8%;
-    width: 100%;
-    display: flex;
-    /* Make the container a flexbox */
-    justify-content: center;
-    /* Center horizontally */
-    align-items: center;
-}
-
-/* #templateButton{
-
-    margin: 50%;
-} */
-.OrderedDataList {
-    /* list-style-type: 1;
-    list-style-position: outside; */
-    margin: 3%;
-    padding: 2%;
-}
-li.listData:hover {
-    background-color: rgb(135, 135, 135);
-}
-.listData {
-    display: flex;
-    border-radius: 5%;
-    cursor: -webkit-grab;
-    cursor: grab;
-    /* border: solid #000; */
-    margin: 2%;
-    text-align: left;
-    justify-content: space-between;
-    align-items: center;
-
-    display: block;
-    background-color: rgb(239, 236, 240);
-
-}
-.remove-btn {
-    margin-left: 10px; /* Adjust spacing between text and the button */
-    color: red;
-    cursor: pointer;
-    
-}
-.btn {
-    display: flex; /* Ensure the button stays within the div */
-    justify-content: flex-end; /* Align the button to the right */
-    flex-grow: 1; /* Make the div take available space so the button aligns to the right */
-}
-
-#fontSelector, 
-#colorPicker, 
-#fontSizeInput {
-    width: 80px; /* Reduce width */
-    height: 20px; /* Reduce height */
-    font-size: 12px; /* Smaller font */
-    padding: 2px;
-}
-
-#colorPicker {
-    width: 30px; /* Make color picker smaller */
-    height: 25px;
-    padding: 0;
-    border: none;
-}
-
-#fontSizeInput {
-    width: 50px; /* Slightly wider for better usability */
-    text-align: center;
-}
+/* Styles for elements *inside* the Konva canvas (#container) if needed */
+/* #konvaCanvas #container { ... } */
