@@ -20,12 +20,13 @@ function setImageloaded(value) {
 function isImageLoaded() {
     return imageloaded;
 }
-
+let containerHeight;
+let containerWidth;
 function fitStageIntoParentContainer() {
     var container = document.querySelector("#konvaCanvas");
 
-    var containerWidth = container.offsetWidth;
-    var containerHeight = container.offsetHeight;
+    containerWidth = container.offsetWidth;
+    containerHeight = container.offsetHeight;
 
     var scalew = containerWidth / sceneWidth;
     var scaleh = containerHeight / sceneHeight;
@@ -40,10 +41,22 @@ function fitStageIntoParentContainer() {
 
 fitStageIntoParentContainer();
 window.addEventListener("resize", fitStageIntoParentContainer);
-
+let realheight;
+let realwidth;
+let realscalex;
+let realscaley;
 function getCurrentImageUrl(imageUrl, callback) {
     var imageObj = new Image();
     imageObj.onload = function () {
+        realwidth=imageObj.width;
+        realheight=imageObj.height;
+        realwidth = imageObj.width;
+        realheight = imageObj.height;
+
+        // Now we calculate the scaling factors INSIDE onload
+        realscalex = realwidth / containerWidth;
+        realscaley = realheight / containerHeight;
+
         var templateImage = new Konva.Image({
             image: imageObj,
             width: sceneWidth,
@@ -176,9 +189,19 @@ function displayUploadedTemplate() {
     });
 }
 
+function getScalingFactors() {
+    if (!realwidth || !realheight) {
+        console.warn("⚠️ Image dimensions not available yet!");
+        return { realscalex: 1, realscaley: 1 }; // Default scale to prevent errors
+    }
+    return { realscalex, realscaley };
+}
+
+
 export default {
     stage,
     layer,
     isImageLoaded,
     getCurrentImageUrl,
 };
+export {getScalingFactors};
