@@ -12,7 +12,7 @@
 
     <script>
         // Retrieve the partial URI from sessionStorage
-        const partialUri = sessionStorage.getItem("downloadUri");
+        const partialUri = localStorage.getItem("downloadpath");
 
         if (!partialUri) {
             console.error('Download URI not found.');

@@ -16,6 +16,8 @@ fontSizeInput.addEventListener("input", () => {
     }
 });
 document.addEventListener("DOMContentLoaded", function () {
+    localStorage.clear;
+    sessionStorage.clear;
     // Function to dynamically load Google Fonts
     function loadGoogleFonts(fonts) {
         const link = document.createElement("link");
@@ -304,7 +306,7 @@ document.querySelector(".generate").addEventListener("click", function () {
     console.log(selectedImageUrl);
     // debugger;
     if (!selectedImageUrl) {
-        // console.log("image url s null");
+        console.log("image url s null");
         let storage = {};
         Object.keys(sessionStorage).forEach((key) => {
             storage[key] = sessionStorage.getItem(key);
@@ -335,9 +337,10 @@ document.querySelector(".generate").addEventListener("click", function () {
             }`;
             const file = dataUriToFile(dataUri, fileName);
             imageFiles.push(file);
-            // console.log(imageFiles);
+            console.log(imageFiles);
         });
-    } // console.log(storage);
+    }
+    // console.log(storage);
     sessionStorage.clear();
     localStorage.clear();
 
@@ -418,7 +421,7 @@ document.querySelector(".generate").addEventListener("click", function () {
                 }
                 debugger;
                 const pythonResult = await pythonRes.json();
-                sessionStorage.setItem("downloadUri", pythonResult);
+                localStorage.setItem("downloadpath", pythonResult);
                 console.log("result" + JSON.stringify(pythonResult));
 
                 // .redirect("filament.app.resources.projects.download");
