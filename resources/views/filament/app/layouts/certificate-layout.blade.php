@@ -56,6 +56,7 @@
                 </x-filament::button>
                 <x-filament::button size="sm" class="generate">
                     Generate
+                    <x-filament::loading-indicator id="indicator" class="h-5 w-5" style="display:none" />
                 </x-filament::button>
             </div>
             <button wire:click="download" style="display: none;" id="routeToDownload"></button>

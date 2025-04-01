@@ -286,6 +286,8 @@ fontSelector.addEventListener("change", () => {
 });
 // Event listener for Generate button
 document.querySelector(".generate").addEventListener("click", function () {
+    document.getElementById("indicator").style.display = "inline-block";
+    // document.querySelector(".generate").textContent = "...";
     let dataArray = [];
     for (let key in x) {
         const properties = {
